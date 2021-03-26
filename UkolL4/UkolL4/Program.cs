@@ -10,6 +10,11 @@ namespace UkolL4
     {
         static void Main(string[] args)
         {
+            Arena arena = new Arena();
+
+            arena.RegistrujBojovnika();
+
+            Console.ReadKey();
         }
     }
 }
