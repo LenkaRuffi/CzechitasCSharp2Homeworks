@@ -19,8 +19,6 @@ namespace UkolL4
 
         public int Zivot { get; private set; } 
 
-        public bool JeZivy { get; private set; } = true;
-
         public Zbran Zbran { get; private set; }
 
         public Bojovnik(string jmeno, int sila, int zivot, int brneni, Zbran zbran)
@@ -38,19 +36,19 @@ namespace UkolL4
             switch (Zbran)
             {
                 case Zbran.Mec:
-                    protivnik.Brneni = (protivnik.Brneni =- (Sila / 10)) >= 0 ? (protivnik.Brneni -= (Sila / 10)) : protivnik.Brneni = 0;
-                    protivnik.Zivot = protivnik.Brneni == 0 ? (protivnik.Zivot -= Sila) : (protivnik.Zivot -= (Sila - protivnik.Brneni));          
+                    protivnik.Brneni -= (protivnik.Brneni - (Sila / 10)) >= 0 ? (Sila / 10) : protivnik.Brneni;
+                    protivnik.Zivot -= protivnik.Brneni == 0 ? Sila : (Sila - protivnik.Brneni);          
                     break;
                 case Zbran.Palcat:
-                    protivnik.Brneni = (protivnik.Brneni =- (Sila / 4)) >= 0 ? (protivnik.Brneni -= (Sila / 4)) : protivnik.Brneni = 0;
+                    protivnik.Brneni -= (protivnik.Brneni - (Sila / 4)) >= 0 ? (Sila / 4) : protivnik.Brneni;
                     protivnik.Zivot -= (Sila / 4);                   
                     break;
                 case Zbran.Kopi:
-                    protivnik.Brneni = (protivnik.Brneni =- (Sila / 10)) >= 0 ? (protivnik.Brneni -= (Sila / 10)) : protivnik.Brneni = 0;
-                    protivnik.Zivot = protivnik.Brneni == 0 ? (protivnik.Zivot -= (Sila / 2)) : protivnik.Zivot -= (Sila - protivnik.Brneni);                   
+                    protivnik.Brneni -= (protivnik.Brneni - (Sila / 10)) >= 0 ? (Sila / 10) : protivnik.Brneni;
+                    protivnik.Zivot -= protivnik.Brneni == 0 ? (Sila/2) : (Sila/2 - protivnik.Brneni);                                   
                     break;
                 case Zbran.Sekacek:                            
-                    protivnik.Brneni = (protivnik.Brneni =- (Sila / 5)) >= 0 ? (protivnik.Brneni -= (Sila / 5)) : protivnik.Brneni = 0;
+                    protivnik.Brneni -= (protivnik.Brneni - (Sila / 5)) >= 0 ? (Sila / 5) : protivnik.Brneni;
                     protivnik.Zivot -= (Sila / 5);
                     break;
                 default:

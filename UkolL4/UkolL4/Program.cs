@@ -36,7 +36,7 @@ namespace UkolL4
             }
 
             Console.WriteLine("Zadávání bojovníků ukončeno, nyní začne BOJ! (stiskni libovolnou klávesu)");
-            arena.nactiVychoziStavZivychBojovniku();
+            arena.NactiVychoziStavZivychBojovniku();
             Console.ReadKey();
             Console.Clear();
 

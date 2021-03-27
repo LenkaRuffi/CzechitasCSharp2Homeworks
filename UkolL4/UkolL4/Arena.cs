@@ -36,7 +36,7 @@ namespace UkolL4
             Console.WriteLine(oddelovac);
         }
 
-        private void bojJednoKolo(Bojovnik bojovnik, Bojovnik souper)
+        private void BojJednoKolo(Bojovnik bojovnik, Bojovnik souper)
         {
             while (bojovnik.OverZdaJeBojovnikZivy() && souper.OverZdaJeBojovnikZivy())
             {
@@ -53,11 +53,11 @@ namespace UkolL4
 
             if (bojovnik.OverZdaJeBojovnikZivy())
             {
-                smazMrtvehoBojovnikaZeSeznamuZivych(souper);
+                SmazMrtvehoBojovnikaZeSeznamuZivych(souper);
             }
             else if (souper.OverZdaJeBojovnikZivy())
             {
-                smazMrtvehoBojovnikaZeSeznamuZivych(bojovnik);
+                SmazMrtvehoBojovnikaZeSeznamuZivych(bojovnik);
             }
         }
 
@@ -90,7 +90,7 @@ namespace UkolL4
                 brneni = VratZadaneCislo("Zadej znovu brnění bojovníka (v rozmezí 0 - 50): ");
             }
 
-            vypisVsechZbrani();
+            VypisVsechZbrani();
             zbran = (Zbran)VratZadaneCislo("Zadej číslo zbraně bojovníka: ");
             while (!ZkontrolujZdaCisloJeVZadanemRozmezi((int)zbran, 1, Enum.GetValues(typeof(Zbran)).Length))
             {
@@ -114,7 +114,7 @@ namespace UkolL4
             return vraceneCislo;
         }
 
-        private void vypisVsechZbrani()
+        private void VypisVsechZbrani()
         {
             int cisloZbrane = 1;
 
@@ -131,12 +131,12 @@ namespace UkolL4
             return cislo >= min && cislo <= max;
         }
 
-        private void smazMrtvehoBojovnikaZeSeznamuZivych(Bojovnik mrtvy)
+        private void SmazMrtvehoBojovnikaZeSeznamuZivych(Bojovnik mrtvy)
         {
             SeznamZivychBojovniku.Remove(mrtvy);
         }
 
-        private void nactiVychoziStavZivychBojovniku()
+        private void NactiVychoziStavZivychBojovniku()
         {
             int poradi = 1;
             foreach (Bojovnik bojovnik in SeznamBojovniku)
@@ -147,7 +147,7 @@ namespace UkolL4
             }
         }
 
-        private void nactiStavZivychBojovnikuDoSlovniku()
+        private void NactiStavZivychBojovnikuDoSlovniku()
         {
             int poradi = 1;
             SlovnikZivychBojovniku.Clear();
@@ -158,7 +158,7 @@ namespace UkolL4
             }
         }
 
-        private bool overKonecBoje(List<Bojovnik> nactenySeznamBojovniku)
+        private bool OverKonecBoje(List<Bojovnik> nactenySeznamBojovniku)
         {
             return nactenySeznamBojovniku.Count <= 1;
         }
@@ -167,25 +167,25 @@ namespace UkolL4
         {
             generatorNahodnychCisel = new Random();
             
-            while (!overKonecBoje(SeznamZivychBojovniku))
+            while (!OverKonecBoje(SeznamZivychBojovniku))
             {
-                nactiStavZivychBojovnikuDoSlovniku();               
+                NactiStavZivychBojovnikuDoSlovniku();               
 
-                rozdeleniNaVyzyvateleASoupere();
+                RozdeleniNaVyzyvateleASoupere();
 
                 for (int i = 0; i < souperi.Count; i++)
                 {
-                    bojJednoKolo(vyzyvatele[i], souperi[i]);
+                    BojJednoKolo(vyzyvatele[i], souperi[i]);
                 }
                 ZobravStavBojovniku(SeznamZivychBojovniku);
             }
         }
 
-        private void rozdeleniNaVyzyvateleASoupere()
+        private void RozdeleniNaVyzyvateleASoupere()
         {
             int celkovyPocetBojovniku = SlovnikZivychBojovniku.Count() + 1;
 
-            while (!overKonecBoje(SlovnikZivychBojovniku.Values.ToList<Bojovnik>()))
+            while (!OverKonecBoje(SlovnikZivychBojovniku.Values.ToList<Bojovnik>()))
             {
                 int keyBojovnika = generatorNahodnychCisel.Next(celkovyPocetBojovniku);
                 Bojovnik vyzyvatel;
