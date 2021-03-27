@@ -17,13 +17,13 @@ namespace UkolL4
 
         public int Brneni { get; private set; }
 
-        public int Zivot { get; private set; } //popremyslet nad ify a min max, aby si to mohla hlidat primo property
+        public int Zivot { get; private set; } 
 
-        public bool JeZivy { get; private set; }
+        public bool JeZivy { get; private set; } = true;
 
-        public Zbrane Zbran { get; private set; }
+        public Zbran Zbran { get; private set; }
 
-        public Bojovnik(string jmeno, int sila, int zivot, int brneni, Zbrane zbran)
+        public Bojovnik(string jmeno, int sila, int zivot, int brneni, Zbran zbran)
         {
             Jmeno = jmeno;
             Sila = sila >= 10 ? Sila = sila : sila = 10;
@@ -35,25 +35,23 @@ namespace UkolL4
 
         public void UtocNa(Bojovnik protivnik)
         {
-            protivnik.Zivot -= Sila;
-
             switch (Zbran)
             {
-                case Zbrane.Mec:
-                    protivnik.Zivot = protivnik.Brneni == 0 ? protivnik.Zivot -= Sila : protivnik.Zivot -= (Sila - protivnik.Brneni);
-                    protivnik.Brneni = protivnik.Brneni > 0 ? protivnik.Brneni -= (Sila / 10) : protivnik.Brneni;
+                case Zbran.Mec:
+                    protivnik.Brneni = (protivnik.Brneni =- (Sila / 10)) >= 0 ? (protivnik.Brneni -= (Sila / 10)) : protivnik.Brneni = 0;
+                    protivnik.Zivot = protivnik.Brneni == 0 ? (protivnik.Zivot -= Sila) : (protivnik.Zivot -= (Sila - protivnik.Brneni));          
                     break;
-                case Zbrane.Palcat:
-                    protivnik.Zivot -= Sila / 4;
-                    protivnik.Brneni = protivnik.Brneni > 0 ? protivnik.Brneni -= (Sila / 4) : protivnik.Brneni;
+                case Zbran.Palcat:
+                    protivnik.Brneni = (protivnik.Brneni =- (Sila / 4)) >= 0 ? (protivnik.Brneni -= (Sila / 4)) : protivnik.Brneni = 0;
+                    protivnik.Zivot -= (Sila / 4);                   
                     break;
-                case Zbrane.Kopi:
-                    protivnik.Zivot = protivnik.Brneni == 0 ? protivnik.Zivot -= (Sila / 2) : protivnik.Zivot -= (Sila - protivnik.Brneni);
-                    protivnik.Brneni = protivnik.Brneni > 0 ? protivnik.Brneni -= (Sila / 10) : protivnik.Brneni;
+                case Zbran.Kopi:
+                    protivnik.Brneni = (protivnik.Brneni =- (Sila / 10)) >= 0 ? (protivnik.Brneni -= (Sila / 10)) : protivnik.Brneni = 0;
+                    protivnik.Zivot = protivnik.Brneni == 0 ? (protivnik.Zivot -= (Sila / 2)) : protivnik.Zivot -= (Sila - protivnik.Brneni);                   
                     break;
-                case Zbrane.Sekacek:
-                    protivnik.Zivot -= Sila / 5;
-                    protivnik.Brneni = protivnik.Brneni > 0 ? protivnik.Brneni -= (Sila / 5) : protivnik.Brneni;
+                case Zbran.Sekacek:                            
+                    protivnik.Brneni = (protivnik.Brneni =- (Sila / 5)) >= 0 ? (protivnik.Brneni -= (Sila / 5)) : protivnik.Brneni = 0;
+                    protivnik.Zivot -= (Sila / 5);
                     break;
                 default:
                     break;
@@ -62,7 +60,12 @@ namespace UkolL4
 
         public override string ToString()
         {
-            return $"{ Jmeno} Život: {Zivot} Brnění: {Brneni}";
+            return $"{ Jmeno} Život: {Zivot} Brnění: {Brneni} Síla: {Sila} Zbraň: {Zbran}";
+        }
+
+        public bool OverZdaJeBojovnikZivy()
+        {
+            return Zivot > 0;
         }
 
     }

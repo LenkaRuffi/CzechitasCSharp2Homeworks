@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace UkolL4
 {
-    enum Zbrane
+    enum Zbran
     {
-        Mec,
+        Mec = 1,
         Palcat,
         Kopi,
         Sekacek,
