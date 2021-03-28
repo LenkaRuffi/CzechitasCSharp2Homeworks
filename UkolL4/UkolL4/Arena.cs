@@ -116,12 +116,9 @@ namespace UkolL4
 
         private void VypisVsechZbrani()
         {
-            int cisloZbrane = 1;
-
-            foreach (Zbran zbranProVypis in Enum.GetValues(typeof(Zbran))) //get values vraci pole ve kterem jsou vsechny polozky toho typu, get names vraci pole stringu, kde jsou nazvy jako stringy
+           foreach (Zbran zbranProVypis in Enum.GetValues(typeof(Zbran))) //get values vraci pole ve kterem jsou vsechny polozky toho typu, get names vraci pole stringu, kde jsou nazvy jako stringy
             {
-                Console.WriteLine($"Je na výběr z těchto zbraní: { zbranProVypis} číslo: {cisloZbrane}");
-                cisloZbrane++;
+                Console.WriteLine($"Je na výběr z těchto zbraní: { zbranProVypis} číslo: {(int)zbranProVypis}");               
             }
 
         }
@@ -136,7 +133,7 @@ namespace UkolL4
             SeznamZivychBojovniku.Remove(mrtvy);
         }
 
-        private void NactiVychoziStavZivychBojovniku()
+        public void NactiVychoziStavZivychBojovniku()
         {
             int poradi = 1;
             foreach (Bojovnik bojovnik in SeznamBojovniku)
@@ -198,8 +195,7 @@ namespace UkolL4
                 }
 
                 vyzyvatele.Add(vyzyvatel);
-                SlovnikZivychBojovniku.Remove(keyBojovnika);
-                generatorNahodnychCisel = new Random(12532);
+                SlovnikZivychBojovniku.Remove(keyBojovnika);               
                 keyBojovnika = generatorNahodnychCisel.Next(celkovyPocetBojovniku);
 
                 if (SlovnikZivychBojovniku.Count != 0)
