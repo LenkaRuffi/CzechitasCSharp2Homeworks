@@ -75,11 +75,12 @@
 
         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,10">
             <Label Content="DUZP" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="90"  HorizontalContentAlignment="Right"/>
-            
-            <Label Content="Datum splatnosti" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="90"  HorizontalContentAlignment="Right"/>
-            
+            <DatePicker Name="InvoiceDateDatePicker"/>
+            <Label Content="Datum splatnosti" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="110"  HorizontalContentAlignment="Right"/>
+            <DatePicker Name="DueDateDatePicker"/>            
             <Label Content="Datum úhrady" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="110"  HorizontalContentAlignment="Right"/>
-            
+            <DatePicker Name="PaymentDateDatePicker"/>
+
         </StackPanel>
 
         <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
