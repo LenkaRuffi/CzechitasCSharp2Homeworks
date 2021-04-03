@@ -1,0 +1,58 @@
+﻿<Window x:Class="ZjednodusenyUcetniDenik.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZjednodusenyUcetniDenik"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"      
+        Title="Zjednodušený účetní deník" Height="450" Width="800" Icon="Diary.ico">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Menu">
+                    <MenuItem Header="Přidat příjem" />
+                    <MenuItem Header="Přidat výdaj" />
+                    <MenuItem Header="Smazat vybranou položku" />
+                    <MenuItem Header="Editovat vybranou položku" />
+                    <Separator />
+                    <MenuItem Header="Export vybraných položek" />
+                    <Separator />
+                    <MenuItem Header="_Ukončit aplikaci" />
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
+
+
+
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <TextBlock x:Name="textBlockNejblizsiNarozeniny" Text="Nejbližší narozeniny má "/>
+            <TextBlock Text=""/>
+            <TextBlock Text=" za "/>
+            <TextBlock Text=" "/>
+            <TextBlock Text=" dní."/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="155.763,0,76,0">
+            <Button Name="buttonFiltering" Width="100" Margin="0,0,0,0" Content="Filtrovat" Click="buttonFiltering_Click"/>
+        </StackPanel>
+        <ListBox Name="ItemListBox" Grid.Column="0" Grid.Row="3" Margin="0,0,0,10" ItemsSource="{Binding Osoby}" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="92,5,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Suma příjmů" HorizontalAlignment="Left" Margin="20,3,0,0" Grid.Row="2" VerticalAlignment="Top" Height="22" Width="72"/>
+
+
+    </Grid>
+</Window>
