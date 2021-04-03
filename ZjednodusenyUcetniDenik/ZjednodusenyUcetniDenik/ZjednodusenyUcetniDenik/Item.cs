@@ -14,6 +14,7 @@ namespace ZjednodusenyUcetniDenik
         public string CounterpartyAddressStreet { get; private set; }
         public string CounterpartyAddressZipCode { get; private set; }
         public string CounterpartyAddressTown { get; private set; }
+        public string CounterpartyAddressState { get; private set; }
         public string CounterpartyIdentificateNumber { get; private set; } //IČ
         public string CounterpartyTaxIdentityNumber { get; private set; } //DIČ
         public DateTime InvoiceDate { get; private set; } //DUZP
