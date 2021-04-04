@@ -32,72 +32,171 @@
 
         <Grid Grid.Row="1" Margin="10,10">
 
-            <Grid.RowDefinitions>               
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+            <Grid.RowDefinitions>            
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>                
-                <ColumnDefinition Width="*"/>
+            <Grid.ColumnDefinitions>      
                 <ColumnDefinition Width="auto"/>               
+                <ColumnDefinition Width="*"/>               
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,10">
-                <Label Content="Číslo dokladu" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="InvoiceNumberTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-                <Label Content="Popis dokladu" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="InvoiceDescriptionTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="220"/>
-                <Label Content="Kategorie položky" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="ItemCategoryTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="280"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,10">
-                <Label Content="DUZP" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <DatePicker Name="InvoiceDateDatePicker"/>
-                <Label Content="Datum splatnosti" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <DatePicker Name="DueDateDatePicker"/>
-                <Label Content="Datum úhrady" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <DatePicker Name="PaymentDateDatePicker"/>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="160"/>
+                   
+                </Grid.ColumnDefinitions>
 
-            </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
-                <Label Content="Protistrana:" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,10">
-                <Label Content="Název" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="CounterpartyNameTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="165"/>
-                <Label Content="Ulice" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="CounterpartyAddressStreetTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-                <Label Content="PSČ" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="CounterpartyAddressZipCodeTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="60"/>
-                <Label Content="Město" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="CounterpartyAddressTownTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="165"/>
-                <Label Content="Stát" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="CounterpartyAddressStateTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="165"/>
-            </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,10">
+                    <Label Content="Číslo dokladu" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right" />                    
+                </StackPanel>
 
-            <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,10">
-                <Label Content="IČ" HorizontalAlignment="Center" VerticalAlignment="Center"  HorizontalContentAlignment="Right"/>
-                <TextBox Name="CounterpartyIdentificateNumberTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-                <Label Content="DIČ" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="CounterpartyTaxIdentityNumberTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0,10">
+                    <TextBox Name="InvoiceNumberTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150"/>
+                </StackPanel>
 
-            </StackPanel>
-            <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="0,10">
-                <Label Content="Suma příjmů" HorizontalAlignment="Center" VerticalAlignment="Center"  HorizontalContentAlignment="Right"/>
-                <TextBox Name="IncomeSumTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
-                <Label Content="Suma výdajů" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                <TextBox Name="CostSumTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Margin="0,10">                   
+                    <Label Content="Popis dokladu" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                    
+                </StackPanel>
 
-            </StackPanel>
-            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" Margin="0,10" HorizontalAlignment="Stretch" >                   
+                    <TextBox Name="InvoiceDescriptionTextBox" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" Margin="0,10">                    
+                    <Label Content="Kategorie položky" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                    
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="5" Orientation="Horizontal" Margin="0,10">
+                    <TextBox Name="ItemCategoryTextBox" HorizontalAlignment="Center" Height="20"  Grid.ColumnSpan="3" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="350"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,10">
+                    <Label Content="DUZP" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                   
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0,10">                    
+                    <DatePicker Name="InvoiceDateDatePicker"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="0,10">                    
+                    <Label Content="Datum splatnosti" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                   
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" Margin="0,10">                    
+                    <DatePicker Name="DueDateDatePicker"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal" Margin="0,10">                    
+                    <Label Content="Datum úhrady" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                    
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="5" Orientation="Horizontal" Margin="0,10">                    
+                    <DatePicker Name="PaymentDateDatePicker"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
+                    <Label Content="Protistrana:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </StackPanel>
+                
+                <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="0,10">
+                    <Label Content="Název" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                    
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="0,10">                    
+                    <TextBox Name="CounterpartyNameTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150"/>
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" Margin="0,10">
+                    <Label Content="IČ" HorizontalAlignment="Center" VerticalAlignment="Center"  HorizontalContentAlignment="Right"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="3" Orientation="Horizontal" Margin="0,10">
+                    <TextBox Name="CounterpartyIdentificateNumberTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="4" Orientation="Horizontal" Margin="0,10">
+                    <Label Content="DIČ" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="5" Orientation="Horizontal" Margin="0,10">
+                    <TextBox Name="CounterpartyTaxIdentityNumberTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="0,10">                    
+                    <Label Content="Ulice" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                    
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="0,10">                    
+                    <TextBox Name="CounterpartyAddressStreetTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" Margin="0,10">                    
+                    <Label Content="PSČ" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                   
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="3" Orientation="Horizontal" Margin="0,10">                    
+                    <TextBox Name="CounterpartyAddressZipCodeTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="4" Orientation="Horizontal" Margin="0,10">                   
+                    <Label Content="Město" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                    
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="5" Orientation="Horizontal" Margin="0,10">                    
+                    <TextBox Name="CounterpartyAddressTownTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="6" Orientation="Horizontal" Margin="0,10">
+                    <Label Content="Stát" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                    
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="7" Orientation="Horizontal" Margin="0,10">
+                    <TextBox Name="CounterpartyAddressStateTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="0,10">
+                    <Label Content="Suma příjmů"  TextBlock.FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"  HorizontalContentAlignment="Right"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="0,10">                   
+                    <TextBox Name="IncomeSumTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150" IsEnabled="False"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Grid.Column="2" Orientation="Horizontal" Margin="0,10">                    
+                    <Label Content="Suma výdajů" TextBlock.FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>                   
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Grid.Column="3" Orientation="Horizontal" Margin="0,10">                   
+                    <TextBox Name="CostSumTextBox" HorizontalAlignment="Center" Height="20" TextAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="150" IsEnabled="False"/>
+                </StackPanel>
+
+
+            </Grid>
+
+
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10">
                 <Button Name="buttonFiltering" Width="100" Content="Filtrovat" VerticalAlignment="Center" Click="buttonFiltering_Click" />
             </StackPanel>
 
-            <ListBox Name="ItemListBox" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" ItemsSource="{Binding Osoby}" />
+            <ListBox Name="ItemListBox" Grid.Column="0" Grid.Row="2"  Grid.ColumnSpan="2"  ItemsSource="{Binding Osoby}"/>
 
         </Grid>      
         
