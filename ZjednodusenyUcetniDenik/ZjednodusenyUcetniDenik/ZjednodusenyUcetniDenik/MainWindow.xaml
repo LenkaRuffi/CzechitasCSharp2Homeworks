@@ -17,9 +17,8 @@
        
        
         <Menu>
-            <MenuItem Header="Menu">
-                <MenuItem Header="Přidat příjem" />
-                <MenuItem Header="Přidat výdaj" />
+            <MenuItem Header="_Menu">
+                <MenuItem x:Name="AddItem" Header="Přidat _položku" Click="AddItem_Click" />                
                 <MenuItem Header="Smazat vybranou položku" />
                 <MenuItem Header="Editovat vybranou položku" />
                 <Separator />
