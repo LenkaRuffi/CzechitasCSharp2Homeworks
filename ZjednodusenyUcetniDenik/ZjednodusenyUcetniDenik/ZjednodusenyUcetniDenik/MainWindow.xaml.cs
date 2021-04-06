@@ -44,7 +44,7 @@ namespace ZjednodusenyUcetniDenik
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Opravdu si přejete ukončit aplikaci?", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Opravdu si přejete ukončit aplikaci?", "Ukončení aplikace", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -53,15 +53,25 @@ namespace ZjednodusenyUcetniDenik
 
         }
 
-        private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindowAccountingBook_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Opravdu si přejete ukončit aplikaci?", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Opravdu si přejete ukončit aplikaci?", "Ukončení aplikace", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.No)
             {
                 e.Cancel = true;
             }
 
+        }
+
+        private void ExportItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Opravdu si přejete exportovat položky do csv?", "Export do csv", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        }
+
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Opravdu si přejete smazat vybranou položku? Smazání položky je nevratné.", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
         }
     }
 }
