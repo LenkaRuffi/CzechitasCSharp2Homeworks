@@ -41,5 +41,27 @@ namespace ZjednodusenyUcetniDenik
             EditItemWindow editItemWindow = new EditItemWindow();
             editItemWindow.ShowDialog();
         }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu si přejete ukončit aplikaci?", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.MainWindow.Close();
+            }
+
+        }
+
+        private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu si přejete ukončit aplikaci?", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+
+        }
     }
 }

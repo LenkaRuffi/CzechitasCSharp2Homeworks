@@ -1,4 +1,4 @@
-﻿<Window x:Class="ZjednodusenyUcetniDenik.MainWindow"
+﻿<Window x:Name="MainWindow1" x:Class="ZjednodusenyUcetniDenik.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ZjednodusenyUcetniDenik"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"      
-        Title="Zjednodušený účetní deník"  Icon="Diary.ico" Background="#FFD4D4D1">   
+        Title="Zjednodušený účetní deník"  Icon="Diary.ico" Background="#FFD4D4D1" Closing="MainWindow1_Closing">   
 
 
     <Grid>
@@ -19,12 +19,12 @@
         <Menu>
             <MenuItem Header="_Menu">
                 <MenuItem x:Name="AddItem" Header="Přidat _položku" Click="AddItem_Click" />                
-                <MenuItem Header="Smazat vybranou položku" />
-                <MenuItem x:Name="EditItem"  Header="Editovat vybranou položku" Click="EditItem_Click" />
+                <MenuItem Header="_Smazat vybranou položku" />
+                <MenuItem x:Name="EditItem"  Header="_Editovat vybranou položku" Click="EditItem_Click" />
                 <Separator />
-                <MenuItem Header="Export vybraných položek" />
+                <MenuItem Header="_Export vybraných položek" />
                 <Separator />
-                <MenuItem Header="Ukončit aplikaci" />
+                <MenuItem x:Name="Exit" Header="_Ukončit aplikaci" Click="Exit_Click" />
             </MenuItem>
         </Menu>
        
