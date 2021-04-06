@@ -20,7 +20,7 @@
             <MenuItem Header="_Menu">
                 <MenuItem x:Name="AddItem" Header="Přidat _položku" Click="AddItem_Click" />                
                 <MenuItem Header="Smazat vybranou položku" />
-                <MenuItem Header="Editovat vybranou položku" />
+                <MenuItem x:Name="EditItem"  Header="Editovat vybranou položku" Click="EditItem_Click" />
                 <Separator />
                 <MenuItem Header="Export vybraných položek" />
                 <Separator />

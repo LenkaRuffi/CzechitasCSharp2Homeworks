@@ -35,5 +35,11 @@ namespace ZjednodusenyUcetniDenik
             AddItemWindow addItemWindow = new AddItemWindow();
             addItemWindow.ShowDialog();
         }
+
+        private void EditItem_Click(object sender, RoutedEventArgs e)
+        {
+            EditItemWindow editItemWindow = new EditItemWindow();
+            editItemWindow.ShowDialog();
+        }
     }
 }
