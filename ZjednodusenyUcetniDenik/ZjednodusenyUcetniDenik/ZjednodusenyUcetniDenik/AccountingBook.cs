@@ -8,5 +8,6 @@ namespace ZjednodusenyUcetniDenik
 {
     class AccountingBook
     {
+       public List<Item> AccountingBookItems = new List<Item>();
     }
 }

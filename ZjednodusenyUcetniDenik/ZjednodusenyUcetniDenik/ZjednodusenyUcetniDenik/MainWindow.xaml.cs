@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CsvHelper;
 
 namespace ZjednodusenyUcetniDenik
 {
@@ -20,9 +23,12 @@ namespace ZjednodusenyUcetniDenik
     /// </summary>
     public partial class MainWindow : Window
     {
+        AccountingBook accountingBook = new AccountingBook();
+
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)
@@ -66,12 +72,35 @@ namespace ZjednodusenyUcetniDenik
 
         private void ExportItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Opravdu si přejete exportovat položky do csv?", "Export do csv", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Opravdu si přejete exportovat položky do csv?", "Export do csv", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                DownloadItemsAsCSVHelper(); //pozor zatím exportuju vše a ještě nevytvářím csv
+            }
         }
 
         private void DeleteItem_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Opravdu si přejete smazat vybranou položku? Smazání položky je nevratné.", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+        }
+
+        private void DownloadItemsAsCSVHelper()
+        {
+            string filename = "ucetniDenik.csv";
+            byte[] bytes;
+
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8))
+                using (var csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
+                {
+                  
+                    csv.WriteRecords(accountingBook.AccountingBookItems);
+                    sw.Flush();
+                    bytes = stream.ToArray();
+                    
+                }
+            }
         }
     }
 }
