@@ -28,6 +28,8 @@ namespace ZjednodusenyUcetniDenik
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = accountingBook;
+            ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
             
         }
 
@@ -38,7 +40,7 @@ namespace ZjednodusenyUcetniDenik
 
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
-            AddItemWindow addItemWindow = new AddItemWindow();
+            AddItemWindow addItemWindow = new AddItemWindow(accountingBook);
             addItemWindow.ShowDialog();
         }
 
@@ -81,7 +83,17 @@ namespace ZjednodusenyUcetniDenik
 
         private void DeleteItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Opravdu si přejete smazat vybranou položku? Smazání položky je nevratné.", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            MessageBoxResult result = MessageBox.Show("Opravdu si přejete smazat vybranou položku? Smazání položky je nevratné.", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            
+            if (result == MessageBoxResult.Yes && ItemDataGrid.SelectedItem != null)
+            {
+                accountingBook.RemoveItem((Item)ItemDataGrid.SelectedItem);               
+            }
+            else
+            {
+                MessageBox.Show("Položka nebyla odstraněna.");
+            }
+            
         }
 
         private void DownloadItemsAsCSVHelper()

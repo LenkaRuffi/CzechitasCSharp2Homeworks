@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZjednodusenyUcetniDenik
 {
-    class Item
+   public class Item
     {
         public string InvoiceNumber { get; private set; }
         public string InvoiceDescription { get; private set; }
@@ -22,5 +22,15 @@ namespace ZjednodusenyUcetniDenik
         public DateTime PaymentDate { get; private set; } //Datum úhrady
         public string ItemCategory { get; private set; }
 
+        public Item(string invoiceNumber, string invoiceDescription)
+        {
+            InvoiceNumber = invoiceNumber;
+            InvoiceDescription = invoiceDescription;
+        }
+
+        public override string ToString()
+        {
+            return InvoiceNumber + " " + InvoiceDescription;
+        }
     }
 }

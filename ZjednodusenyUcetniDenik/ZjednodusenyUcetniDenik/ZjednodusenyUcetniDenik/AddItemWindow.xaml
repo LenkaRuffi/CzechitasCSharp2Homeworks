@@ -83,7 +83,7 @@
         </Grid>
 
         <StackPanel  Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="okButton"  Height="20" Width="100" Content="OK" IsDefault="True" Margin="10,10"/>
+            <Button Name="okButton"  Height="20" Width="100" Content="OK" IsDefault="True" Margin="10,10" Click="okButton_Click"/>
             <Button Name="cancelButton"  Height="20" Width="100" Content="Cancel" IsCancel=" True" Margin="10,10"/>
         </StackPanel>
 

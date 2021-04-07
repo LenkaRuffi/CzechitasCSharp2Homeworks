@@ -19,9 +19,27 @@ namespace ZjednodusenyUcetniDenik
     /// </summary>
     public partial class AddItemWindow : Window
     {
-        public AddItemWindow()
+        private AccountingBook accountingBook;
+        
+        public AddItemWindow(AccountingBook accountingBook)
         {
             InitializeComponent();
+            this.accountingBook = accountingBook;
+        }
+
+        private void okButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                accountingBook.AddItem(InvoiceNumberTextBox.Text, InvoiceDescriptionTextBox.Text);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+
+
         }
     }
 }
