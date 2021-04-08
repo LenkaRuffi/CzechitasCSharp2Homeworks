@@ -21,6 +21,7 @@ namespace ZjednodusenyUcetniDenik
         public DateTime DueDate { get; private set; } //Datum splatnosti
         public DateTime PaymentDate { get; private set; } //Datum úhrady
         public string ItemCategory { get; private set; }
+        public ItemType ItemType { get; set; }
 
         public Item(string invoiceNumber, string invoiceDescription)
         {

@@ -9,7 +9,7 @@ namespace ZjednodusenyUcetniDenik
     public class Cost : Item
     {
         public double CostAmount { get; private set; }
-
+       
         public Cost(string invoiceNumber, string invoiceDescription) :base(invoiceNumber, invoiceDescription)
         {
 
