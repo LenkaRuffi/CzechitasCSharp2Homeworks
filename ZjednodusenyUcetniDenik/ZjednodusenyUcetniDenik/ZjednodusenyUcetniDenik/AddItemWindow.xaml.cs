@@ -31,8 +31,20 @@ namespace ZjednodusenyUcetniDenik
         {
             try
             {
-                accountingBook.AddItem(InvoiceNumberTextBox.Text, InvoiceDescriptionTextBox.Text);
-                Close();
+                double amount;
+                bool isNumber = double.TryParse(AmountTextBox.Text, out amount);
+                if(isNumber)
+                {
+                    
+                    
+                    accountingBook.AddItem(InvoiceNumberTextBox.Text, InvoiceDescriptionTextBox.Text, amount, ItemType.Výdaj);
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Je chybně zadána částka dokladu.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+                
             }
             catch (Exception ex)
             {

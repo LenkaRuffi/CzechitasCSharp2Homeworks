@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace ZjednodusenyUcetniDenik
 {
-    class Income
+    class Income : Item
     {
         public double IncomeAmount { get; private set; }
+
+        public Income(string invoiceNumber, string invoiceDescription, double incomeAmount, ItemType itemType) : base(invoiceNumber, invoiceDescription, itemType)
+        {
+            IncomeAmount = incomeAmount;   
+        }
     }
 }

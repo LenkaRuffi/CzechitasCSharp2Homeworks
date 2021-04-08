@@ -23,10 +23,11 @@ namespace ZjednodusenyUcetniDenik
         public string ItemCategory { get; private set; }
         public ItemType ItemType { get; set; }
 
-        public Item(string invoiceNumber, string invoiceDescription)
+        public Item(string invoiceNumber, string invoiceDescription, ItemType itemType)
         {
             InvoiceNumber = invoiceNumber;
             InvoiceDescription = invoiceDescription;
+            ItemType = ItemType;
         }
 
         public override string ToString()

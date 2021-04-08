@@ -21,7 +21,7 @@ namespace ZjednodusenyUcetniDenik
 
         }
 
-        public void AddItem(string invoiceNumber, string invoiceDescription)
+        public void AddItem(string invoiceNumber, string invoiceDescription, double amount, ItemType itemType)
         {
             if (invoiceDescription.Length < 3)
             {
@@ -36,7 +36,7 @@ namespace ZjednodusenyUcetniDenik
                 throw new ArgumentException("Narozeniny nesmí být v budoucnosti");
             }*/
 
-            Item newItem = new Item(invoiceNumber, invoiceDescription);
+            Item newItem = new Income(invoiceNumber, invoiceDescription, amount, itemType);
             AccountingBookItems.Add(newItem);
            
         }

@@ -10,7 +10,7 @@ namespace ZjednodusenyUcetniDenik
     {
         public double CostAmount { get; private set; }
        
-        public Cost(string invoiceNumber, string invoiceDescription) :base(invoiceNumber, invoiceDescription)
+        public Cost(string invoiceNumber, string invoiceDescription, ItemType itemType) : base(invoiceNumber, invoiceDescription, itemType)
         {
 
         }
