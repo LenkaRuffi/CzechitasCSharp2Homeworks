@@ -27,6 +27,20 @@ namespace BankaUkol
         static void Main(string[] args)
         {
 
+            Banka banka = new Banka();
+
+            banka.ZalozUcet("Pepa", 500);
+            banka.ZalozUcet("Jarda", 8000);
+            banka.ZalozUcet("Honza", 500000);
+
+            banka.VypisSeznamUctu();
+
+            banka.NajdiUcet("Pepa");
+            banka.NajdiUcet("Bla");
+
+            banka.UlozPenize("Pepa", 600);
+
+            banka.VypisSeznamUctu();
             Console.ReadKey();
         }
     }
