@@ -39,6 +39,7 @@ namespace BankaUkol
             banka.NajdiUcet("Bla");
 
             banka.UlozPenize("Pepa", 600);
+            banka.UlozPenize("Bla", 600);
 
             banka.VypisSeznamUctu();
             Console.ReadKey();

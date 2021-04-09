@@ -19,10 +19,9 @@ namespace BankaUkol
         }
 
         
-
         public override string ToString()
         {
-            return ($"Vlastnikem uctu je {Vlastnik} a zůstatek je {Zustatek}");
+            return ($"Vlastnikem účtu je {Vlastnik} a zůstatek je {Zustatek}");
         }
     }
 }

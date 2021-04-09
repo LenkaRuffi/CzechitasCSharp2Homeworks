@@ -36,9 +36,17 @@ namespace BankaUkol
         {
             Ucet navysovanyUcet;
 
-            SeznamUctu.TryGetValue(jmenoVlastnika, out navysovanyUcet);
+            bool jmenoVlastnikaJeOK = SeznamUctu.TryGetValue(jmenoVlastnika, out navysovanyUcet);
 
-            navysovanyUcet.Zustatek = navysovanyUcet.Zustatek + ukladanaCastka;
+            if(jmenoVlastnikaJeOK)
+            {
+                navysovanyUcet.Zustatek = navysovanyUcet.Zustatek + ukladanaCastka;
+                Console.WriteLine("Peníze vloženy");
+            }
+           else
+            {
+                Console.WriteLine("Nelze vložit peníze, účet dle vlastníka nenalezen");
+            }
                         
         }
 
