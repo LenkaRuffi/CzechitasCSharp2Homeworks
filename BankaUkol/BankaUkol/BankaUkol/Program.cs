@@ -42,6 +42,11 @@ namespace BankaUkol
             banka.UlozPenize("Bla", 600);
 
             banka.VypisSeznamUctu();
+
+            IUcet ziskanyUcet = banka.NajdiUcet("Jarda");
+           // ziskanyUcet.Zustatek = 500; nelze, read only
+
+
             Console.ReadKey();
         }
     }
