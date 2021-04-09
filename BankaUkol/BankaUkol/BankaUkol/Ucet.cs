@@ -18,8 +18,7 @@ namespace BankaUkol
             Zustatek = pocatecniZustatek;
         }
 
-        public void navys()
-        { }
+        
 
         public override string ToString()
         {
