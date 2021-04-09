@@ -11,10 +11,9 @@ namespace ZjednodusenyUcetniDenik
         public string InvoiceNumber { get; private set; }
         public string InvoiceDescription { get; private set; }
         public string CounterpartyName { get; private set; }
-        public string CounterpartyAddressStreet { get; private set; }
-        public string CounterpartyAddressZipCode { get; private set; }
-        public string CounterpartyAddressTown { get; private set; }
-        public string CounterpartyAddressState { get; private set; }
+
+        public Address CounterPartyAddress { get; private set; }
+
         public string CounterpartyIdentificateNumber { get; private set; } //IČ
         public string CounterpartyTaxIdentityNumber { get; private set; } //DIČ
         public DateTime InvoiceDate { get; private set; } //DUZP
@@ -27,7 +26,7 @@ namespace ZjednodusenyUcetniDenik
         {
             InvoiceNumber = invoiceNumber;
             InvoiceDescription = invoiceDescription;
-            ItemType = ItemType;
+            ItemType = itemType;
         }
 
         public override string ToString()
