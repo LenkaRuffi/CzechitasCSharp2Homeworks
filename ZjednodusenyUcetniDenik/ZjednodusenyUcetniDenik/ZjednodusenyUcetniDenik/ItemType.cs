@@ -8,7 +8,7 @@ namespace ZjednodusenyUcetniDenik
 {
     public enum ItemType
     {
-        Příjem,
+        Příjem = 1,
         Výdaj
     }
 }

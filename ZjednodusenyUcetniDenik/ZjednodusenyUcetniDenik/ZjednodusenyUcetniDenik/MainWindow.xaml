@@ -131,17 +131,13 @@
                     <DataGridTextColumn Header="Název protistrany" Binding="{Binding CounterpartyName}"/>
                     <DataGridTextColumn Header="IČ protistrany" Binding="{Binding CounterpartyIdentificateNumber}"/>
                     <DataGridTextColumn Header="DIČ protistrany" Binding="{Binding CounterpartyTaxIdentityNumber}"/>
-                    <DataGridTextColumn Header="Ulice protistrany" Binding="{Binding AddressStreet}"/>
-                    <DataGridTextColumn Header="PSČ protistrany" Binding="{Binding AddressZipCode}"/>
-                    <DataGridTextColumn Header="Město protistrany" Binding="{Binding CounterpartyAddress.AddressTown}"/>
-                    <DataGridTextColumn Header="Stát protistrany" Binding="{Binding CounterpartyAddress.AddressState}"/>
+                    <DataGridTextColumn Header="Ulice protistrany" Binding="{Binding CounterPartyAddress.Street}"/>
+                    <DataGridTextColumn Header="PSČ protistrany" Binding="{Binding CounterPartyAddressAddress.ZipCode}"/>
+                    <DataGridTextColumn Header="Město protistrany" Binding="{Binding CounterpartyAddress.Town}"/>
+                    <DataGridTextColumn Header="Stát protistrany" Binding="{Binding CounterPartyAddress.State}"/>
                     <DataGridTextColumn Header="Částka výdaj" Binding="{Binding CostAmount}"/>
                     <DataGridTextColumn Header="Částka příjem" Binding="{Binding IncomeAmount}"/>
-                    <DataGridTextColumn Header="Typ položky" Binding="{Binding ItemType}"/>
-                    <!--The Email property contains a URI.  For example "mailto:lucy0@adventure-works.com"-->
-                    <!--DataGridHyperlinkColumn Header="Email" Binding="{Binding Email}"  ContentBinding="{Binding Email, Converter={StaticResource EmailConverter}}" />
-                    <DataGridCheckBoxColumn Header="Member?" Binding="{Binding IsMember}" />
-                    <DataGridComboBoxColumn Header="Order Status"  SelectedItemBinding="{Binding Status}" ItemsSource="{Binding Source={StaticResource myEnum}}" -->
+                    <DataGridTextColumn Header="Typ položky" Binding="{Binding ItemType}"/>                   
                 </DataGrid.Columns>
             </DataGrid>
 

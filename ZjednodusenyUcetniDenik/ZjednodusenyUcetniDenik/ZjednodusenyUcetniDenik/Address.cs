@@ -8,9 +8,17 @@ namespace ZjednodusenyUcetniDenik
 {
     public class Address
     {
-        public string AddressStreet { get; set; }
-        public string AddressZipCode { get; set; }
-        public string AddressTown { get; set; }
-        public string AddressState { get; set; }
+        public string Street { get; set; }
+        public string ZipCode { get; set; }
+        public string Town { get; set; }
+        public string State { get; set; }
+
+        public Address(string street, string zipCode, string town, string state)
+        {
+            Street = street;
+            ZipCode = zipCode;
+            Town = town;
+            State = state;
+        }
     }
 }

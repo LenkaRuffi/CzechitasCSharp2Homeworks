@@ -30,14 +30,15 @@ namespace ZjednodusenyUcetniDenik
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
+            {               
                 double amount;
                 bool isNumber = double.TryParse(AmountTextBox.Text, out amount);
-                if(isNumber)
-                {
-                    
-                    
-                    accountingBook.AddItem(InvoiceNumberTextBox.Text, InvoiceDescriptionTextBox.Text, amount, ItemType.Výdaj);
+                bool itemOK = int.TryParse(ItemTypeComboBox.SelectedValue.ToString(), out int item);
+                Address counterPartyAdress = new Address(CounterpartyAddressStreetTextBox.Text, CounterpartyAddressZipCodeTextBox.Text, CounterpartyAddressTownTextBox.Text, CounterpartyAddressStateTextBox.Text);
+
+                if (isNumber)
+                {                       
+                    accountingBook.AddItem(InvoiceNumberTextBox.Text, InvoiceDescriptionTextBox.Text, CounterpartyNameTextBox.Text, counterPartyAdress, CounterpartyIdentificateNumberTextBox.Text, CounterpartyTaxIdentityNumberTextBox.Text, InvoiceDateDatePicker.SelectedDate, DueDateDatePicker.SelectedDate, PaymentDateDatePicker.SelectedDate, ItemCategoryTextBox.Text, (ItemType)item, amount);
                     Close();
                 }
                 else

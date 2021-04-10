@@ -21,7 +21,7 @@ namespace ZjednodusenyUcetniDenik
 
         }
 
-        public void AddItem(string invoiceNumber, string invoiceDescription, double amount, ItemType itemType)
+        public void AddItem(string invoiceNumber, string invoiceDescription, string counterPartyName, Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, DateTime? paymentDate, string itemCategory, ItemType itemType, double amount)
         {
             if (invoiceDescription.Length < 3)
             {
@@ -36,8 +36,17 @@ namespace ZjednodusenyUcetniDenik
                 throw new ArgumentException("Narozeniny nesmí být v budoucnosti");
             }*/
 
-            Item newItem = new Income(invoiceNumber, invoiceDescription, amount, itemType);
-            AccountingBookItems.Add(newItem);
+           if(itemType == ItemType.Příjem)
+            {
+                Item newItem = new Income(invoiceNumber, invoiceDescription, counterPartyName, counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate, paymentDate, itemCategory, itemType, amount);
+                AccountingBookItems.Add(newItem);
+            }
+           else
+            {
+                Item newItem = new Cost(invoiceNumber, invoiceDescription, counterPartyName, counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate, paymentDate, itemCategory, itemType, amount);
+                AccountingBookItems.Add(newItem);
+            }
+         
            
         }
 
