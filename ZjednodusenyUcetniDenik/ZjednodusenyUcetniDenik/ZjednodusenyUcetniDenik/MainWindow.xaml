@@ -32,9 +32,9 @@
                 <MenuItem x:Name="Exit" Header="_Ukončit aplikaci" Click="Exit_Click" />
             </MenuItem>
         </Menu>
-       
 
-        <Grid Grid.Row="1" Grid.ColumnSpan ="2" Margin="10,10">
+
+        <Grid Grid.Row="1" Grid.ColumnSpan ="2" Margin="10,10" DataContext="{Binding AccountingBookItems}">
 
             <Grid.RowDefinitions>            
                 <RowDefinition Height="auto"/>
@@ -132,8 +132,8 @@
                     <DataGridTextColumn Header="IČ protistrany" Binding="{Binding CounterpartyIdentificateNumber}"/>
                     <DataGridTextColumn Header="DIČ protistrany" Binding="{Binding CounterpartyTaxIdentityNumber}"/>
                     <DataGridTextColumn Header="Ulice protistrany" Binding="{Binding CounterPartyAddress.Street}"/>
-                    <DataGridTextColumn Header="PSČ protistrany" Binding="{Binding CounterPartyAddressAddress.ZipCode}"/>
-                    <DataGridTextColumn Header="Město protistrany" Binding="{Binding CounterpartyAddress.Town}"/>
+                    <DataGridTextColumn Header="PSČ protistrany" Binding="{Binding CounterPartyAddress.ZipCode}"/>
+                    <DataGridTextColumn Header="Město protistrany" Binding="{Binding CounterPartyAddress.Town}"/>
                     <DataGridTextColumn Header="Stát protistrany" Binding="{Binding CounterPartyAddress.State}"/>
                     <DataGridTextColumn Header="Částka výdaj" Binding="{Binding CostAmount}"/>
                     <DataGridTextColumn Header="Částka příjem" Binding="{Binding IncomeAmount}"/>
