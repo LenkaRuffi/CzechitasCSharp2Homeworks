@@ -30,6 +30,7 @@ namespace ZjednodusenyUcetniDenik
             InitializeComponent();
             DataContext = accountingBook;
             ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
+            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
             
         }
 
