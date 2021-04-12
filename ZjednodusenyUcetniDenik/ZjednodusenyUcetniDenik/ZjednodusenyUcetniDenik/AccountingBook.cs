@@ -36,16 +36,9 @@ namespace ZjednodusenyUcetniDenik
                 throw new ArgumentException("Narozeniny nesmí být v budoucnosti");
             }*/
 
-           if(itemType == ItemType.Příjem)
-            {
-                Item newItem = new Income(invoiceNumber, invoiceDescription, counterPartyName, counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate, paymentDate, itemCategory, itemType, amount);
+                Item newItem = new Item(invoiceNumber, invoiceDescription, counterPartyName, counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate, paymentDate, itemCategory, itemType, amount);
                 AccountingBookItems.Add(newItem);
-            }
-           else
-            {
-                Item newItem = new Cost(invoiceNumber, invoiceDescription, counterPartyName, counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate, paymentDate, itemCategory, itemType, amount);
-                AccountingBookItems.Add(newItem);
-            }
+          
          
            
         }

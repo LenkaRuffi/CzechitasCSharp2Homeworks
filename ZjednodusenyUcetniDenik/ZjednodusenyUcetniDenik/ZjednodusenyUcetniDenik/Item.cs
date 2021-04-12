@@ -21,8 +21,9 @@ namespace ZjednodusenyUcetniDenik
         public DateTime? PaymentDate { get; private set; } //Datum úhrady
         public string ItemCategory { get; private set; }
         public ItemType ItemType { get; set; }
+        public double Amount { get; private set; }
 
-        public Item(string invoiceNumber, string invoiceDescription, string counterPartyName, Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, DateTime? paymentDate, string itemCategory, ItemType itemType)
+        public Item(string invoiceNumber, string invoiceDescription, string counterPartyName, Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, DateTime? paymentDate, string itemCategory, ItemType itemType, double amount)
         {
             InvoiceNumber = invoiceNumber;
             InvoiceDescription = invoiceDescription;
@@ -35,6 +36,7 @@ namespace ZjednodusenyUcetniDenik
             PaymentDate = paymentDate;
             ItemCategory = itemCategory;
             ItemType = itemType;
+            Amount = amount;
         }
 
         public override string ToString()

@@ -101,11 +101,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Cost.cs" />
     <Compile Include="EditItemWindow.xaml.cs">
       <DependentUpon>EditItemWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Income.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemType.cs" />
     <Compile Include="MainWindow.xaml.cs">
