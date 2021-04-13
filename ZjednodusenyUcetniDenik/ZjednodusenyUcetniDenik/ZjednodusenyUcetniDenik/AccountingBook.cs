@@ -10,7 +10,7 @@ namespace ZjednodusenyUcetniDenik
 {
     public class AccountingBook : INotifyPropertyChanged
     {
-       //public List<Item> AccountingBookItems1 = new List<Item>();
+      
        public ObservableCollection<Item> AccountingBookItems { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

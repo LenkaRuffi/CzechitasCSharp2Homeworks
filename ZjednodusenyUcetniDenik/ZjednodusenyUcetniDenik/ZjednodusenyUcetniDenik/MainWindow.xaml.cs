@@ -47,7 +47,7 @@ namespace ZjednodusenyUcetniDenik
 
         private void EditItem_Click(object sender, RoutedEventArgs e)
         {
-            EditItemWindow editItemWindow = new EditItemWindow();
+            EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem, accountingBook);
             editItemWindow.ShowDialog();
         }
 
