@@ -30,13 +30,18 @@ namespace ZjednodusenyUcetniDenik
             InitializeComponent();
             DataContext = accountingBook;
             ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
-            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
-        
+            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;                
         }
 
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)
         {
+            IEnumerable<Item> selectedItems =
+            from Item in accountingBook.AccountingBookItems
+            where Item.CounterpartyName == "x"
+            select Item;
 
+            // var ok = accountingBook.AccountingBookItems.Select(item => item.CounterpartyName == "x");
+            ItemDataGrid.ItemsSource = selectedItems;
         }
 
         private void AddItem_Click(object sender, RoutedEventArgs e)
@@ -119,6 +124,12 @@ namespace ZjednodusenyUcetniDenik
                     
                 }
             }
+        }
+
+        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        {
+            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
+
         }
     }
 }
