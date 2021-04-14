@@ -47,7 +47,7 @@ namespace ZjednodusenyUcetniDenik
 
         private void EditItem_Click(object sender, RoutedEventArgs e)
         {
-            EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem, accountingBook);
+            EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem);
             editItemWindow.ShowDialog();
             ItemDataGrid.Items.Refresh();
         }
@@ -91,11 +91,15 @@ namespace ZjednodusenyUcetniDenik
             {
                 accountingBook.RemoveItem((Item)ItemDataGrid.SelectedItem);               
             }
+            else if (result == MessageBoxResult.Yes && ItemDataGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Neexistují položky k odstranění.");
+            }
             else
             {
                 MessageBox.Show("Položka nebyla odstraněna.");
             }
-            
+
         }
 
         private void DownloadItemsAsCSVHelper()
