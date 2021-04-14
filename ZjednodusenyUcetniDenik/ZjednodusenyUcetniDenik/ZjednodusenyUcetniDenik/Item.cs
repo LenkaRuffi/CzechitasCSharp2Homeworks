@@ -39,6 +39,22 @@ namespace ZjednodusenyUcetniDenik
             Amount = amount;
         }
 
+        public void EditWholeItem(string invoiceNumber, string invoiceDescription, string counterPartyName, Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount)
+        {
+            InvoiceNumber = invoiceNumber;
+            InvoiceDescription = invoiceDescription;
+            CounterpartyName = counterPartyName;
+            CounterPartyAddress = counterPartyAddress;
+            CounterpartyIdentificateNumber = counterpartyIdentificateNumber;
+            CounterpartyTaxIdentityNumber = counterpartyTaxIdentityNumber;
+            InvoiceDate = invoiceDate;
+            DueDate = dueDate;
+            PaymentDate = paymentDate;
+            ItemCategory = itemCategory;
+            ItemType = itemType;
+            Amount = amount;
+        }
+
         public override string ToString()
         {
             return InvoiceNumber + " " + InvoiceDescription;

@@ -33,9 +33,9 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Typ dokladu" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" />
-            <ComboBox Name="ItemTypeComboBox" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"  Margin="0,0,10,0" SelectedIndex="0">
-                <ComboBoxItem Content="Příjem"/>
-                <ComboBoxItem Content="Výdaj"/>
+            <ComboBox Name="ItemTypeComboBox" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"  Margin="0,0,10,0" SelectedIndex="0" SelectedValuePath="Tag">
+                <ComboBoxItem Content="Příjem" Tag ="1" IsSelected="True"/>
+                <ComboBoxItem Content="Výdaj" Tag ="2" />
             </ComboBox>
 
             <Label Content="Částka" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" />

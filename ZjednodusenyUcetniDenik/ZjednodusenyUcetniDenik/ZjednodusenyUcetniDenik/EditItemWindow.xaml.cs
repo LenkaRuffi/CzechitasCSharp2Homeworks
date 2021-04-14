@@ -27,7 +27,8 @@ namespace ZjednodusenyUcetniDenik
             InitializeComponent();
             this.selectedItem = selectedItem;
             this.accountingBook = accountingBook;
-            //chybi combobox ItemTypeComboBox
+          
+            ItemTypeComboBox.SelectedValue = (int)selectedItem.ItemType;
             AmountDoubleUpDown.Value = selectedItem.Amount;
             InvoiceNumberTextBox.Text = selectedItem.InvoiceNumber;
             InvoiceDescriptionTextBox.Text = selectedItem.InvoiceDescription;
@@ -48,10 +49,10 @@ namespace ZjednodusenyUcetniDenik
         {
             try
             { 
-                accountingBook.RemoveItem(selectedItem);
+                //accountingBook.RemoveItem(selectedItem);
                 bool itemOK = int.TryParse(ItemTypeComboBox.SelectedValue.ToString(), out int item);
                 Address counterPartyAdress = new Address(CounterpartyAddressStreetTextBox.Text, CounterpartyAddressZipCodeTextBox.Text, CounterpartyAddressTownTextBox.Text, CounterpartyAddressStateTextBox.Text);
-                accountingBook.AddItem(InvoiceNumberTextBox.Text, InvoiceDescriptionTextBox.Text, CounterpartyNameTextBox.Text, counterPartyAdress, CounterpartyIdentificateNumberTextBox.Text, CounterpartyTaxIdentityNumberTextBox.Text, InvoiceDateDatePicker.SelectedDate, DueDateDatePicker.SelectedDate, PaymentDateDatePicker.SelectedDate, ItemCategoryTextBox.Text, (ItemType)item, AmountDoubleUpDown.Value);
+                selectedItem.EditWholeItem(InvoiceNumberTextBox.Text, InvoiceDescriptionTextBox.Text, CounterpartyNameTextBox.Text, counterPartyAdress, CounterpartyIdentificateNumberTextBox.Text, CounterpartyTaxIdentityNumberTextBox.Text, InvoiceDateDatePicker.SelectedDate, DueDateDatePicker.SelectedDate, PaymentDateDatePicker.SelectedDate, ItemCategoryTextBox.Text, (ItemType)item, AmountDoubleUpDown.Value);
                 Close();
             }
             catch (Exception ex)

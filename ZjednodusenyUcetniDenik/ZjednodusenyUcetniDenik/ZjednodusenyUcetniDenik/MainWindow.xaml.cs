@@ -42,13 +42,14 @@ namespace ZjednodusenyUcetniDenik
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
             AddItemWindow addItemWindow = new AddItemWindow(accountingBook);
-            addItemWindow.ShowDialog();
+            addItemWindow.ShowDialog();            
         }
 
         private void EditItem_Click(object sender, RoutedEventArgs e)
         {
             EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem, accountingBook);
             editItemWindow.ShowDialog();
+            ItemDataGrid.Items.Refresh();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
