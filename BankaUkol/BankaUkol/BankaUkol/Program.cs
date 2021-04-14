@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BankaUkol
 {
     class Program
@@ -44,7 +45,9 @@ namespace BankaUkol
             banka.VypisSeznamUctu();
 
             IUcet ziskanyUcet = banka.NajdiUcet("Jarda");
-           // ziskanyUcet.Zustatek = 500; nelze, read only
+            // ziskanyUcet.Zustatek = 500; nelze, read only
+
+            //(ziskanyUcet as Ucet).Zustatek = 0; 
 
 
             Console.ReadKey();

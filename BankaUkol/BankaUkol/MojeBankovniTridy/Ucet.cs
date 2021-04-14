@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankaUkol
+namespace MojeBankovniTridy
 {
-    public class Ucet : IUcet
+    internal class Ucet : IUcet //nelze privatni
     {
         public double Zustatek { get; set; }
 
