@@ -37,7 +37,7 @@ namespace ZjednodusenyUcetniDenik
         {
             IEnumerable<Item> selectedItems =
             from Item in accountingBook.AccountingBookItems
-            where Item.CounterpartyName == "x"
+            where Item.CounterpartyName == CounterpartyNameTextBox.Text
             select Item;
 
             // var ok = accountingBook.AccountingBookItems.Select(item => item.CounterpartyName == "x");
@@ -52,9 +52,17 @@ namespace ZjednodusenyUcetniDenik
 
         private void EditItem_Click(object sender, RoutedEventArgs e)
         {
-            EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem);
-            editItemWindow.ShowDialog();
-            ItemDataGrid.Items.Refresh();
+            if(ItemDataGrid.SelectedItem != null)
+            {
+                EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem);
+                editItemWindow.ShowDialog();
+                ItemDataGrid.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Nebyla vybrána položka k editaci.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -90,19 +98,24 @@ namespace ZjednodusenyUcetniDenik
 
         private void DeleteItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Opravdu si přejete smazat vybranou položku? Smazání položky je nevratné.", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-            
-            if (result == MessageBoxResult.Yes && ItemDataGrid.SelectedItem != null)
+            if(ItemDataGrid.SelectedItem == null)
             {
-                accountingBook.RemoveItem((Item)ItemDataGrid.SelectedItem);               
-            }
-            else if (result == MessageBoxResult.Yes && ItemDataGrid.SelectedItem == null)
-            {
-                MessageBox.Show("Neexistují položky k odstranění.");
+                MessageBox.Show("Nebyla vybrána položka k odstranění.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                MessageBox.Show("Položka nebyla odstraněna.");
+                MessageBoxResult result = MessageBox.Show("Opravdu si přejete smazat vybranou položku? Smazání položky je nevratné.", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+
+                if (result == MessageBoxResult.Yes && ItemDataGrid.SelectedItem != null)
+                {
+                    accountingBook.RemoveItem((Item)ItemDataGrid.SelectedItem);
+                }
+
+                else
+                {
+                    MessageBox.Show("Položka nebyla odstraněna.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
             }
 
         }

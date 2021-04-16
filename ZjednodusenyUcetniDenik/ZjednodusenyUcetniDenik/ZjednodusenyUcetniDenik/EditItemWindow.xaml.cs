@@ -42,6 +42,7 @@ namespace ZjednodusenyUcetniDenik
             CounterpartyAddressZipCodeTextBox.Text = selectedItem.CounterPartyAddress.ZipCode;
             CounterpartyAddressTownTextBox.Text = selectedItem.CounterPartyAddress.Town;
             CounterpartyAddressStateTextBox.Text = selectedItem.CounterPartyAddress.State;
+            YearIntUpDown.Value = selectedItem.AccountingYear;
         }
 
         private void okButton_Click(object sender, RoutedEventArgs e)
