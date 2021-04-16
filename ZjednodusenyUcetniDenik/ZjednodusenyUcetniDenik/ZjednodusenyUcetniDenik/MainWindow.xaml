@@ -31,6 +31,9 @@
                 <Separator />
                 <MenuItem x:Name="Exit" Header="_Ukončit aplikaci" Click="Exit_Click" />
             </MenuItem>
+            <MenuItem Header="Filtr">
+                <MenuItem x:Name="FilterItems" Header="Filtrovat" Click="FilterItems_Click" />               
+            </MenuItem>
         </Menu>
 
 

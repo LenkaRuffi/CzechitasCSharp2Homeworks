@@ -144,5 +144,12 @@ namespace ZjednodusenyUcetniDenik
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
 
         }
+
+        private void FilterItems_Click(object sender, RoutedEventArgs e)
+        {
+            FilteringWindow filterItemWindow = new FilteringWindow();
+            filterItemWindow.ShowDialog();
+            ItemDataGrid.Items.Refresh();
+        }
     }
 }
