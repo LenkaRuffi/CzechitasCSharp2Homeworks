@@ -24,7 +24,8 @@ namespace ZjednodusenyUcetniDenik
     public partial class MainWindow : Window
     {
         AccountingBook accountingBook = new AccountingBook();
-        Image logoFilter1 = new Image();
+        IEnumerable<Item> selectedItems;
+       Image logoFilter1 = new Image();
 
         public MainWindow()
         {
@@ -38,7 +39,7 @@ namespace ZjednodusenyUcetniDenik
 
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<Item> selectedItems =
+            selectedItems =
             from Item in accountingBook.AccountingBookItems
             where Item.CounterpartyName == CounterpartyNameTextBox.Text
             select Item;
@@ -145,6 +146,7 @@ namespace ZjednodusenyUcetniDenik
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
+            selectedItems = null;
 
         }
 
@@ -166,6 +168,55 @@ namespace ZjednodusenyUcetniDenik
         private void FilterClearButton_Click(object sender, RoutedEventArgs e)
         {
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
+            selectedItems = null;
+        }
+
+        private void EditItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemDataGrid.SelectedItem != null)
+            {
+                EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem);
+                editItemWindow.ShowDialog();
+                ItemDataGrid.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Nebyla vybrána položka k editaci.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddNewItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddItemWindow addItemWindow = new AddItemWindow(accountingBook);
+            addItemWindow.ShowDialog();
+        }
+
+        private void DeleteItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemDataGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Nebyla vybrána položka k odstranění.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Opravdu si přejete smazat vybranou položku? Smazání položky je nevratné.", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+
+                if (result == MessageBoxResult.Yes && ItemDataGrid.SelectedItem != null)
+                {
+                    accountingBook.RemoveItem((Item)ItemDataGrid.SelectedItem);
+                    if (selectedItems != null)
+                    {
+                        selectedItems = selectedItems.Where(i => i != ItemDataGrid.SelectedItem).ToList();
+                        ItemDataGrid.ItemsSource = selectedItems;
+                    }
+                }
+
+                else
+                {
+                    MessageBox.Show("Položka nebyla odstraněna.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Information);
+                }                
+
+            }
         }
     }
 }

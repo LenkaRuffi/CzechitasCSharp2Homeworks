@@ -179,5 +179,23 @@
   <ItemGroup>
     <None Include="Resources\filter-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Filter.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Clear-Filters.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="delete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="addGreen.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="editPencil.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

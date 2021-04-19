@@ -25,6 +25,7 @@ namespace ZjednodusenyUcetniDenik
         {
             InitializeComponent();
             this.accountingBook = accountingBook;
+            YearIntUpDown.Value = DateTime.Today.Year;
         }
 
         private void okButton_Click(object sender, RoutedEventArgs e)
