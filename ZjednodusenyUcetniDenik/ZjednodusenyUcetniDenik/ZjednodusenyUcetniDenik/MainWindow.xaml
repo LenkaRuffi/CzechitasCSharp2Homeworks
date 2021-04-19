@@ -12,6 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>           
+            <RowDefinition Height="auto"/>           
             <RowDefinition Height="*"/>           
         </Grid.RowDefinitions>
 
@@ -19,8 +20,8 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-       
-       
+
+
         <Menu Grid.ColumnSpan="3">
             <MenuItem Header="_Menu">
                 <MenuItem x:Name="AddItem" Header="Přidat _položku" Click="AddItem_Click" />
@@ -32,12 +33,32 @@
                 <MenuItem x:Name="Exit" Header="_Ukončit aplikaci" Click="Exit_Click" />
             </MenuItem>
             <MenuItem Header="Filtr">
-                <MenuItem x:Name="FilterItems" Header="Filtrovat" Click="FilterItems_Click" />               
+                <MenuItem x:Name="FilterItems" Header="Filtrovat" Click="FilterItems_Click" />
             </MenuItem>
         </Menu>
 
+        <DockPanel Grid.Row="1" Grid.ColumnSpan="3">
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar>
+                    <Button ToolTip="Cut selection to Windows Clipboard.">
+                        <Image x:Name="logoFilter" Source="Filtrl.ico" Height="20" Width="20" /> 
+                    </Button>
+                    <Button x:Name="FilterButton" ToolTip="Složitý filtr pro uvedené záznamy." Click="FilterButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3,0,0,0">Filtr</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="FilterClearButton" ToolTip="Zobrazení nefiltrovaných dat." Click="FilterClearButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3,0,0,0">Zrušení filtru</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+          </DockPanel>      
 
-        <Grid Grid.Row="1" Grid.ColumnSpan ="2" Margin="10,10" DataContext="{Binding AccountingBookItems}">
+
+        <Grid Grid.Row="2" Grid.ColumnSpan ="2" Margin="10,10" DataContext="{Binding AccountingBookItems}">
 
             <Grid.RowDefinitions>            
                 <RowDefinition Height="auto"/>

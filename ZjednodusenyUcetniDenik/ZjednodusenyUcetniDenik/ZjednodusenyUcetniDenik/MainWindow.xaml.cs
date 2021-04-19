@@ -24,13 +24,16 @@ namespace ZjednodusenyUcetniDenik
     public partial class MainWindow : Window
     {
         AccountingBook accountingBook = new AccountingBook();
+        Image logoFilter1 = new Image();
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = accountingBook;
             ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
-            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;                
+            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
+            //logoFilter1 = (Image)Resources.FindName("filter_icon"); //nefunguje
+            //logoFilter = logoFilter1;
         }
 
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)
@@ -150,6 +153,19 @@ namespace ZjednodusenyUcetniDenik
             FilteringWindow filterItemWindow = new FilteringWindow();
             filterItemWindow.ShowDialog();
             ItemDataGrid.Items.Refresh();
+        }
+
+        private void FilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            FilteringWindow filterItemWindow = new FilteringWindow();
+            filterItemWindow.ShowDialog();
+            ItemDataGrid.Items.Refresh();
+
+        }
+
+        private void FilterClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
         }
     }
 }
