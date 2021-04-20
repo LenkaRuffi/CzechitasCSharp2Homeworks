@@ -18,7 +18,33 @@ namespace ZjednodusenyUcetniDenik
         public AccountingBook()
         {
             AccountingBookItems = new ObservableCollection<Item>();
+        }
+               
 
+        public double? SumIncome
+        {
+            get
+            {
+                return AccountingBookItems.Where(a => a.ItemType == ItemType.Příjem).Sum(a => a.Amount); 
+            }
+
+            set
+            {
+
+            }
+        }
+
+        public double? SumCost
+        {
+            get
+            {
+                return AccountingBookItems.Where(a => a.ItemType == ItemType.Výdaj).Sum(a => a.Amount); 
+            }
+
+            set
+            {
+
+            }
         }
 
         public void AddItem(string invoiceNumber, string invoiceDescription, string counterPartyName, Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount, int? year)
@@ -37,9 +63,7 @@ namespace ZjednodusenyUcetniDenik
             }*/
 
                 Item newItem = new Item(invoiceNumber, invoiceDescription, counterPartyName, counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate, paymentDate, itemCategory, itemType, amount, year);
-                AccountingBookItems.Add(newItem);
-          
-         
+                AccountingBookItems.Add(newItem);         
            
         }
 

@@ -25,16 +25,14 @@ namespace ZjednodusenyUcetniDenik
     {
         AccountingBook accountingBook = new AccountingBook();
         IEnumerable<Item> selectedItems;
-       Image logoFilter1 = new Image();
-
+       
         public MainWindow()
         {
             InitializeComponent();
             DataContext = accountingBook;
             ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
-            //logoFilter1 = (Image)Resources.FindName("filter_icon"); //nefunguje
-            //logoFilter = logoFilter1;
+            SetSumTextBoxes();
         }
 
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)
@@ -51,7 +49,11 @@ namespace ZjednodusenyUcetniDenik
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
             AddItemWindow addItemWindow = new AddItemWindow(accountingBook);
-            addItemWindow.ShowDialog();            
+            addItemWindow.ShowDialog();
+
+            SetSumTextBoxes();
+                       
+           
         }
 
         private void EditItem_Click(object sender, RoutedEventArgs e)
@@ -183,12 +185,15 @@ namespace ZjednodusenyUcetniDenik
             {
                 MessageBox.Show("Nebyla vybrána položka k editaci.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            SetSumTextBoxes();
         }
 
         private void AddNewItemButton_Click(object sender, RoutedEventArgs e)
         {
             AddItemWindow addItemWindow = new AddItemWindow(accountingBook);
             addItemWindow.ShowDialog();
+            SetSumTextBoxes();
         }
 
         private void DeleteItemButton_Click(object sender, RoutedEventArgs e)
@@ -217,6 +222,14 @@ namespace ZjednodusenyUcetniDenik
                 }                
 
             }
+
+            SetSumTextBoxes();
+        }
+
+        private void SetSumTextBoxes()
+        {
+            IncomeSumTextBox.Text = accountingBook.SumIncome.ToString();
+            CostSumTextBox.Text = accountingBook.SumCost.ToString();
         }
     }
 }
