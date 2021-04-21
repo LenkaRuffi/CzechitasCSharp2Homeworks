@@ -19,9 +19,31 @@ namespace ZjednodusenyUcetniDenik
     /// </summary>
     public partial class FilteringWindow : Window
     {
-        public FilteringWindow()
+        private AccountingBook accountingBook;
+        public IEnumerable<Item> selectedItems;
+
+        public FilteringWindow(AccountingBook accountingBook)
         {
             InitializeComponent();
+            this.accountingBook = accountingBook;
+        }
+
+        public void FilteringItems()
+        {
+            if (CounterpartyNameCheckBox.IsChecked == true)
+            {
+              selectedItems =
+              from Item in accountingBook.AccountingBookItems
+              where Item.CounterpartyName == CounterpartyNameTextBox.Text
+              select Item;
+            }
+            
+        }
+
+        private void buttonFiltering_Click(object sender, RoutedEventArgs e)
+        {
+            FilteringItems();
+            Close();
         }
     }
 }

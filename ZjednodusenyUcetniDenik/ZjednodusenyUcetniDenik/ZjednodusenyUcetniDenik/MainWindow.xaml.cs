@@ -154,16 +154,17 @@ namespace ZjednodusenyUcetniDenik
 
         private void FilterItems_Click(object sender, RoutedEventArgs e)
         {
-            FilteringWindow filterItemWindow = new FilteringWindow();
+            FilteringWindow filterItemWindow = new FilteringWindow(accountingBook);
             filterItemWindow.ShowDialog();
             ItemDataGrid.Items.Refresh();
         }
 
         private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
-            FilteringWindow filterItemWindow = new FilteringWindow();
+            FilteringWindow filterItemWindow = new FilteringWindow(accountingBook);
             filterItemWindow.ShowDialog();
-            ItemDataGrid.Items.Refresh();
+            ItemDataGrid.ItemsSource = filterItemWindow.selectedItems;
+            //ItemDataGrid.Items.Refresh();
 
         }
 
