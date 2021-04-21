@@ -174,10 +174,10 @@
     <Resource Include="Filtrl.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Filter.png" />
+    <Resource Include="Resources\Filter.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\filter-icon.png" />
+    <Resource Include="Resources\filter-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Filter.ico" />

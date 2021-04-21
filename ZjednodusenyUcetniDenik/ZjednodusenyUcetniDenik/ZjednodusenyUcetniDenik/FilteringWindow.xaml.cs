@@ -28,16 +28,16 @@ namespace ZjednodusenyUcetniDenik
             this.accountingBook = accountingBook;
         }
 
-        public void FilteringItems()
+        public void FilteringItems() //na lekci by mel vitek vysvetlit linq, tak aby se daly vrstvit dotazy, takze bych pak podle ifu to mela byt schopna vyfiltrovat do ienumerable
         {
             if (CounterpartyNameCheckBox.IsChecked == true)
             {
-              selectedItems =
-              from Item in accountingBook.AccountingBookItems
-              where Item.CounterpartyName == CounterpartyNameTextBox.Text
-              select Item;
+                selectedItems =
+                from Item in accountingBook.AccountingBookItems
+                where Item.CounterpartyName == CounterpartyNameTextBox.Text
+                select Item;
             }
-            
+
         }
 
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)
@@ -45,5 +45,17 @@ namespace ZjednodusenyUcetniDenik
             FilteringItems();
             Close();
         }
+
+        /*public void Test(CheckBox checkBox, TextBox textBox )
+        {
+            if(checkBox.IsChecked == true)
+            {
+                selectedItems =
+              from Item in accountingBook.AccountingBookItems
+              where Item.CounterpartyName == textBox.Text
+              select Item;
+            }
+          
+        }*/
     }
 }

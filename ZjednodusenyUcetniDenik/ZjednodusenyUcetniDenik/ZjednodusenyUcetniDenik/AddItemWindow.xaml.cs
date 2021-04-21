@@ -32,7 +32,7 @@ namespace ZjednodusenyUcetniDenik
         {
             try
             {               
-                //double? amount = AmountDoubleUpDown.Value;               
+                             
                 bool itemOK = int.TryParse(ItemTypeComboBox.SelectedValue.ToString(), out int item);
                 Address counterPartyAdress = new Address(CounterpartyAddressStreetTextBox.Text, CounterpartyAddressZipCodeTextBox.Text, CounterpartyAddressTownTextBox.Text, CounterpartyAddressStateTextBox.Text);
                                                
