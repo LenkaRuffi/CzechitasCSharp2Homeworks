@@ -41,13 +41,13 @@
                     </Button>
                     <Button x:Name="EditItemButton" ToolTip="Úprava vybraného záznamu." Click="EditItemButton_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="logoEdit" Source="pack://siteoforigin:,,,/Resources/editPencil.ico" Height="15" Width="20" />
+                            <Image x:Name="logoEdit" Source="Resources/editPencil.ico" Height="15" Width="20" />
                             <TextBlock Margin="3,0,0,0">Upravit</TextBlock>
                         </StackPanel>
                     </Button>
                     <Button x:Name="DeleteItemButton" ToolTip="Smazání vybraného záznamu." Click="DeleteItemButton_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="logoDelete" Source="pack://siteoforigin:,,,/Resources/delete.ico" Height="15" Width="20" />
+                            <Image x:Name="logoDelete" Source="Resources/delete.ico" Height="15" Width="20" />
                             <TextBlock Margin="3,0,0,0">Smazat</TextBlock>
                         </StackPanel>
                     </Button>
@@ -55,7 +55,7 @@
                 <ToolBar Background="#FFE6E6E6">                   
                     <Button x:Name="FilterButton" ToolTip="Složitý filtr pro uvedené záznamy." Click="FilterButton_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="logoFilter" Source="pack://siteoforigin:,,,/Resources/Filter.ico" Height="15" Width="20" />
+                            <Image x:Name="logoFilter" Source="Resources/Filter.ico" Height="15" Width="20" />
                             <TextBlock Margin="3,0,0,0">Filtr</TextBlock>
                         </StackPanel>
                     </Button>

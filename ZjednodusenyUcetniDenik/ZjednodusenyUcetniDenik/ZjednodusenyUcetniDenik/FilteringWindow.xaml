@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZjednodusenyUcetniDenik" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Filtrování záznamů" Height="900" Width="800" Icon="Filtrl.ico" Background="#FFD4D4D1">
+        Title="Filtrování záznamů" Height="900" Width="800" Icon="Resources/Filtrl.ico" Background="#FFD4D4D1">
 
     <Grid Margin="10,10" DataContext="{Binding AccountingBookItems}">
 

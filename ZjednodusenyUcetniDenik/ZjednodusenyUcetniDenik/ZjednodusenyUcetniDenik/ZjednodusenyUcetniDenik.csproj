@@ -171,40 +171,31 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Document-add.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="edit.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Filtrl.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Filter.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\filter-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Filter.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Clear-Filters.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Add.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="delete.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="editPencil.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Diary.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\addGreen.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\editPencil.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\delete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Filter.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Clear-Filters.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Filtrl.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Document-add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\edit.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
