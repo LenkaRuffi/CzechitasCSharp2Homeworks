@@ -25,10 +25,16 @@ namespace ZjednodusenyUcetniDenik
     {
         AccountingBook accountingBook = new AccountingBook();
         IEnumerable<Item> selectedItems;
-       
+        string pathToCommonAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+        string AppName = "ZjednodusenyUcetniDenik";
+        string database = "databaze.csv";
+        string pathToCsvDatabaseData;
+
         public MainWindow()
         {
             InitializeComponent();
+            pathToCsvDatabaseData = System.IO.Path.Combine(pathToCommonAppData, AppName, database);
+            checkAndLoadDataIfDbDirectoryExistElseCreate();
             DataContext = accountingBook;
             ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
@@ -42,44 +48,14 @@ namespace ZjednodusenyUcetniDenik
             where Item.CounterpartyName == CounterpartyNameTextBox.Text
             select Item;
 
-            // var ok = accountingBook.AccountingBookItems.Select(item => item.CounterpartyName == "x");
+            
             ItemDataGrid.ItemsSource = selectedItems;
         }
 
-        private void AddItem_Click(object sender, RoutedEventArgs e)
-        {
-            AddItemWindow addItemWindow = new AddItemWindow(accountingBook);
-            addItemWindow.ShowDialog();
-
-            SetSumTextBoxes();
-                       
-           
-        }
-
-        private void EditItem_Click(object sender, RoutedEventArgs e)
-        {
-            if(ItemDataGrid.SelectedItem != null)
-            {
-                EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem);
-                editItemWindow.ShowDialog();
-                ItemDataGrid.Items.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Nebyla vybrána položka k editaci.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-           
-        }
-
+       
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Opravdu si přejete ukončit aplikaci?", "Ukončení aplikace", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                Application.Current.MainWindow.Close();
-            }
-
+           Application.Current.MainWindow.Close();
         }
 
         private void MainWindowAccountingBook_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -90,6 +66,10 @@ namespace ZjednodusenyUcetniDenik
             {
                 e.Cancel = true;
             }
+            else
+            {
+                SaveItemsAsCSVHelper();
+            }
 
         }
 
@@ -98,63 +78,55 @@ namespace ZjednodusenyUcetniDenik
             MessageBoxResult result = MessageBox.Show("Opravdu si přejete exportovat položky do csv na Vaši plochu?", "Export do csv", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                DownloadItemsAsCSVHelper();
-                MessageBox.Show("Položky byly exportovány");
+                DownloadItemsAsCSVHelper();               
             }
         }
 
-        private void DeleteItem_Click(object sender, RoutedEventArgs e)
-        {
-            if(ItemDataGrid.SelectedItem == null)
-            {
-                MessageBox.Show("Nebyla vybrána položka k odstranění.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                MessageBoxResult result = MessageBox.Show("Opravdu si přejete smazat vybranou položku? Smazání položky je nevratné.", "Upozornění", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-
-                if (result == MessageBoxResult.Yes && ItemDataGrid.SelectedItem != null)
-                {
-                    accountingBook.RemoveItem((Item)ItemDataGrid.SelectedItem);
-                }
-
-                else
-                {
-                    MessageBox.Show("Položka nebyla odstraněna.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
-            }
-
-        }
+        
 
         private void DownloadItemsAsCSVHelper()
         {
-            string filename = "ucetniDenik.csv";
+           /* string filename = "ucetniDenik.csv";
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string completePath = System.IO.Path.Combine(filePath, filename);
-            //byte[] bytes;
-
-            /* using (MemoryStream stream = new MemoryStream())
-             {
-                 using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8))
-                 using (var csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
-                 {
-
-                     csv.WriteRecords(accountingBook.AccountingBookItems);
-                     sw.Flush();
-                     bytes = stream.ToArray();
-
-                 }
-             }*/
-
-            using (StreamWriter sw = new StreamWriter(completePath, false, Encoding.UTF8))
-            using (var csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
+            string completePath = System.IO.Path.Combine(filePath, filename); */
+            
+            try
             {
+                Microsoft.Win32.SaveFileDialog saveDialog = new Microsoft.Win32.SaveFileDialog()                
+                {                    
+                    Filter = "Csv(*.csv)|.csv|All(*.*)|*"                   
+                };
 
-                csv.WriteRecords(accountingBook.AccountingBookItems);
-                //sw.Flush();
-                //bytes = stream.ToArray();
+                Nullable<bool> result = saveDialog.ShowDialog();
+                
+                string filename;
 
+                if (result == true)
+                {
+                    
+                    filename = saveDialog.FileName;
+                    using (StreamWriter sw = new StreamWriter(/*completePath*/ filename, false, Encoding.UTF8))
+                    using (var csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
+                    {
+                        if (selectedItems == null)
+                        {
+                            csv.WriteRecords(accountingBook.AccountingBookItems);
+                        }
+                        else
+                        {
+                            csv.WriteRecords(selectedItems);
+                        }
+
+                       // MessageBox.Show("Položky byly exportovány");
+                    }
+
+                }
+
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 
@@ -176,7 +148,8 @@ namespace ZjednodusenyUcetniDenik
         {
             FilteringWindow filterItemWindow = new FilteringWindow(accountingBook);
             filterItemWindow.ShowDialog();
-            ItemDataGrid.ItemsSource = filterItemWindow.selectedItems;
+            selectedItems = filterItemWindow.selectedItems;
+            ItemDataGrid.ItemsSource = selectedItems;
             //ItemDataGrid.Items.Refresh();
 
         }
@@ -244,6 +217,57 @@ namespace ZjednodusenyUcetniDenik
         {
             IncomeSumTextBox.Text = accountingBook.SumIncome.ToString();
             CostSumTextBox.Text = accountingBook.SumCost.ToString();
+        }
+
+        private void LoadData()
+        {
+            
+            CsvHelper.Configuration.CsvConfiguration csvConfiguration = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                PrepareHeaderForMatch = args => args.Header.ToLower(),
+            };
+
+            using (StreamReader reader = new StreamReader(pathToCsvDatabaseData))
+            using (CsvReader csv = new CsvReader(reader, csvConfiguration))
+            {                
+                var records = csv.GetRecords<Item>();
+                List<Item> list = records.ToList();
+
+                foreach(Item item in list)
+                {
+                    accountingBook.AccountingBookItems.Add(item);
+                }
+
+            }
+        }
+
+        private void checkAndLoadDataIfDbDirectoryExistElseCreate()
+        {
+            if (File.Exists(pathToCsvDatabaseData)) 
+            {
+                LoadData();
+            }
+            else
+            {
+                Directory.CreateDirectory(System.IO.Path.GetDirectoryName(pathToCsvDatabaseData));
+            }
+
+        }
+
+        private void SaveItemsAsCSVHelper()
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(pathToCsvDatabaseData, false, Encoding.UTF8))
+                using (var csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
+                {
+                    csv.WriteRecords(accountingBook.AccountingBookItems);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
     }
 }

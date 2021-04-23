@@ -24,7 +24,7 @@ namespace ZjednodusenyUcetniDenik
         public double? Amount { get; private set; }
         public int? AccountingYear { get; private set; }
 
-        public Item(string invoiceNumber, string invoiceDescription, string counterPartyName, Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount, int? year)
+        public Item(string invoiceNumber, string invoiceDescription, string counterPartyName, Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount, int? accountingYear)
         {
             InvoiceNumber = invoiceNumber;
             InvoiceDescription = invoiceDescription;
@@ -38,7 +38,7 @@ namespace ZjednodusenyUcetniDenik
             ItemCategory = itemCategory;
             ItemType = itemType;
             Amount = amount;
-            AccountingYear = year;
+            AccountingYear = accountingYear;
         }
 
         public void EditWholeItem(string invoiceNumber, string invoiceDescription, string counterPartyName, Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount)

@@ -23,18 +23,11 @@
 
 
         <Menu Grid.ColumnSpan="3">
-            <MenuItem Header="_Menu">
-                <MenuItem x:Name="AddItem" Header="Přidat _položku" Click="AddItem_Click" />
-                <MenuItem x:Name="DeleteItem" Header="_Smazat vybranou položku" Click="DeleteItem_Click" />
-                <MenuItem x:Name="EditItem"  Header="_Editovat vybranou položku" Click="EditItem_Click" />
-                <Separator />
+            <MenuItem Header="_Menu">                   
                 <MenuItem x:Name="ExportItem" Header="_Export vybraných položek" Click="ExportItem_Click" />
                 <Separator />
                 <MenuItem x:Name="Exit" Header="_Ukončit aplikaci" Click="Exit_Click" />
-            </MenuItem>
-            <MenuItem Header="Filtr">
-                <MenuItem x:Name="FilterItems" Header="Filtrovat" Click="FilterItems_Click" />
-            </MenuItem>
+            </MenuItem>            
         </Menu>
 
         <DockPanel Grid.Row="1" Grid.ColumnSpan="3">
