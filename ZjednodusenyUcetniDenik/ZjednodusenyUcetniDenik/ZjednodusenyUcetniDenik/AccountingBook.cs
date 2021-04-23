@@ -53,17 +53,9 @@ namespace ZjednodusenyUcetniDenik
             {
                 throw new ArgumentException("Popis faktury je příliš krátký");
             }
-           /* if (narozeniny == null)
-            {
-                throw new ArgumentException("Nebylo zadáno datum narození");
-            }
-            if (narozeniny.Value.Date > DateTime.Today)
-            {
-                throw new ArgumentException("Narozeniny nesmí být v budoucnosti");
-            }*/
-
-                Item newItem = new Item(invoiceNumber, invoiceDescription, counterPartyName, counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate, paymentDate, itemCategory, itemType, amount, year);
-                AccountingBookItems.Add(newItem);         
+          
+            Item newItem = new Item(invoiceNumber, invoiceDescription, counterPartyName, counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate, paymentDate, itemCategory, itemType, amount, year);
+            AccountingBookItems.Add(newItem);         
            
         }
 

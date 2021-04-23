@@ -43,13 +43,44 @@ namespace ZjednodusenyUcetniDenik
 
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)
         {
-            selectedItems =
-            from Item in accountingBook.AccountingBookItems
-            where Item.CounterpartyName == CounterpartyNameTextBox.Text
-            select Item;
+            int ItemTypeConvert = int.Parse(ItemTypeComboBox.SelectedValue.ToString());
 
-            
-            ItemDataGrid.ItemsSource = selectedItems;
+            if (YearIntUpDown.Value != null && ItemTypeConvert == 0)
+            {
+                selectedItems =
+                            from Item in accountingBook.AccountingBookItems
+                            where Item.AccountingYear == YearIntUpDown.Value
+                            select Item;
+                ItemDataGrid.ItemsSource = selectedItems;
+            }
+            else if (YearIntUpDown.Value == null && ItemTypeConvert != 0)
+            {                
+                selectedItems =
+                           from Item in accountingBook.AccountingBookItems
+                           where (int)Item.ItemType == ItemTypeConvert
+                           select Item;
+                ItemDataGrid.ItemsSource = selectedItems;
+            }
+            else if (YearIntUpDown.Value != null && ItemTypeConvert != 0)
+            {               
+                selectedItems =
+                              from Item in accountingBook.AccountingBookItems
+                              where Item.AccountingYear == YearIntUpDown.Value
+                              select Item;
+
+                selectedItems =
+                              from Item in selectedItems
+                              where (int)Item.ItemType == ItemTypeConvert
+                              select Item;
+
+                ItemDataGrid.ItemsSource = selectedItems;
+            }
+
+            else
+            {
+                clearFilter();
+            }
+            SetSumTextBoxes();            
         }
 
        
@@ -132,16 +163,10 @@ namespace ZjednodusenyUcetniDenik
 
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
-            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
-            selectedItems = null;
+            clearFilter();
+            YearIntUpDown.Value = null;
+            ItemTypeComboBox.SelectedValue = "0";
 
-        }
-
-        private void FilterItems_Click(object sender, RoutedEventArgs e)
-        {
-            FilteringWindow filterItemWindow = new FilteringWindow(accountingBook);
-            filterItemWindow.ShowDialog();
-            ItemDataGrid.Items.Refresh();
         }
 
         private void FilterButton_Click(object sender, RoutedEventArgs e)
@@ -151,13 +176,11 @@ namespace ZjednodusenyUcetniDenik
             selectedItems = filterItemWindow.selectedItems;
             ItemDataGrid.ItemsSource = selectedItems;
             //ItemDataGrid.Items.Refresh();
-
         }
 
         private void FilterClearButton_Click(object sender, RoutedEventArgs e)
         {
-            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
-            selectedItems = null;
+            clearFilter();
         }
 
         private void EditItemButton_Click(object sender, RoutedEventArgs e)
@@ -215,8 +238,17 @@ namespace ZjednodusenyUcetniDenik
 
         private void SetSumTextBoxes()
         {
-            IncomeSumTextBox.Text = accountingBook.SumIncome.ToString();
-            CostSumTextBox.Text = accountingBook.SumCost.ToString();
+           if(selectedItems != null)
+            {
+                IncomeSumTextBox.Text = selectedItems.Where(a => a.ItemType == ItemType.Příjem).Sum(a => a.Amount).ToString();
+                CostSumTextBox.Text = selectedItems.Where(a => a.ItemType == ItemType.Výdaj).Sum(a => a.Amount).ToString();
+            }
+           else
+            {
+                IncomeSumTextBox.Text = accountingBook.SumIncome.ToString();
+                CostSumTextBox.Text = accountingBook.SumCost.ToString();
+            }
+          
         }
 
         private void LoadData()
@@ -268,6 +300,13 @@ namespace ZjednodusenyUcetniDenik
             {
                 MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+        }
+
+        private void clearFilter()
+        {
+            ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
+            selectedItems = null;
+            SetSumTextBoxes();
         }
     }
 }
