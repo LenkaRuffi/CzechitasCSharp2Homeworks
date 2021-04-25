@@ -126,7 +126,7 @@
 
         <StackPanel Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Name="buttonFiltering"  Width="100" Content="Filtrovat" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,10" Click="buttonFiltering_Click"/>
-            <Button Name="buttonClear" Width="100" Content="Vyčistit filtr" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,10"/>
+            <Button x:Name="buttonCancel" Width="100" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,10" Click="buttonCancel_Click"/>
         </StackPanel>
 
     </Grid>

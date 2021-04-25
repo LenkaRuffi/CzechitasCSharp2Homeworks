@@ -174,8 +174,12 @@ namespace ZjednodusenyUcetniDenik
             FilteringWindow filterItemWindow = new FilteringWindow(accountingBook);
             filterItemWindow.ShowDialog();
             selectedItems = filterItemWindow.selectedItems;
-            ItemDataGrid.ItemsSource = selectedItems;
-            //ItemDataGrid.Items.Refresh();
+            if(selectedItems != null)
+            {
+                ItemDataGrid.ItemsSource = selectedItems;
+                FilterButton.Background = Brushes.Gray;
+                //ItemDataGrid.Items.Refresh();
+            }
         }
 
         private void FilterClearButton_Click(object sender, RoutedEventArgs e)
@@ -307,6 +311,7 @@ namespace ZjednodusenyUcetniDenik
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
             selectedItems = null;
             SetSumTextBoxes();
+            FilterButton.Background = Brushes.Transparent;
         }
     }
 }

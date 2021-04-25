@@ -46,6 +46,11 @@ namespace ZjednodusenyUcetniDenik
             Close();
         }
 
+        private void buttonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
         /*public void Test(CheckBox checkBox, TextBox textBox )
         {
             if(checkBox.IsChecked == true)
