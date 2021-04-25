@@ -23,5 +23,10 @@ namespace UkolPraceSeSoubory
             Vek = vek;
         }
 
+        public override string ToString()
+        {
+            return Jmeno + "," + Vek + ",";
+        }
+
     }
 }
