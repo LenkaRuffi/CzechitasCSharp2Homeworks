@@ -39,8 +39,7 @@ namespace ZjednodusenyUcetniDenik
             DataContext = accountingBook;
             ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
-            SetSumTextBoxes();
-            RememberedFilter = new Filter();
+            SetSumTextBoxes();            
         }
 
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ZjednodusenyUcetniDenik
 {
-    public class Filter
+    public class Filter : Item
     {
-        public Item actualFilteredDataItem { get; set; }
+        //public Item actualFilteredDataItem { get; set; }
 
         public bool? ItemTypeCheckBox { get; set; } = false;
         public bool? AmountCheckBox { get; set; } = false;
@@ -30,7 +30,11 @@ namespace ZjednodusenyUcetniDenik
         public Filter(bool? itemTypeCheckBox, bool? amountCheckBox, bool? invoiceNumberCheckBox, bool? invoiceDescriptionCheckBox, bool? itemCategoryCheckBox,
             bool? invoiceDateCheckBox, bool? dueDateCheckBox, bool? paymentDateCheckBox, bool? yearCheckBox, bool? counterpartyNameCheckBox,
             bool? counterpartyIdentificateNumberCheckBox, bool? counterpartyTaxIdentityNumberCheckBox, bool? counterpartyStreetCheckBox, bool? counterpartyZipCodeCheckBox,
-            bool? counterpartyAddressTownCheckBox, bool? counterpartyAddressStateCheckBox)
+            bool? counterpartyAddressTownCheckBox, bool? counterpartyAddressStateCheckBox, string invoiceNumber, string invoiceDescription, string counterPartyName, 
+            Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, 
+            DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount, int? accountingYear) : base(invoiceNumber, invoiceDescription, counterPartyName, 
+              counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate,  paymentDate, itemCategory, 
+              itemType, amount, accountingYear)
         {
             ItemTypeCheckBox = itemTypeCheckBox;
             AmountCheckBox = amountCheckBox;
@@ -50,10 +54,8 @@ namespace ZjednodusenyUcetniDenik
             CounterpartyAddressStateCheckBox = counterpartyAddressStateCheckBox;
         }
 
-        public Filter()
-        {
+        
 
-        }
           
     }
 }
