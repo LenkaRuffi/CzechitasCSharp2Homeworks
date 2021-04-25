@@ -29,6 +29,7 @@ namespace ZjednodusenyUcetniDenik
         string AppName = "ZjednodusenyUcetniDenik";
         string database = "databaze.csv";
         string pathToCsvDatabaseData;
+        Filter RememberedFilter;
 
         public MainWindow()
         {
@@ -39,6 +40,7 @@ namespace ZjednodusenyUcetniDenik
             ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
             SetSumTextBoxes();
+            RememberedFilter = new Filter();
         }
 
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)
@@ -171,13 +173,14 @@ namespace ZjednodusenyUcetniDenik
 
         private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
-            FilteringWindow filterItemWindow = new FilteringWindow(accountingBook);
+            FilteringWindow filterItemWindow = new FilteringWindow(accountingBook, RememberedFilter);
             filterItemWindow.ShowDialog();
             selectedItems = filterItemWindow.selectedItems;
             if(selectedItems != null)
             {
                 ItemDataGrid.ItemsSource = selectedItems;
                 FilterButton.Background = Brushes.Gray;
+                RememberedFilter = filterItemWindow.ActualFilter;
                 //ItemDataGrid.Items.Refresh();
             }
         }
@@ -312,6 +315,7 @@ namespace ZjednodusenyUcetniDenik
             selectedItems = null;
             SetSumTextBoxes();
             FilterButton.Background = Brushes.Transparent;
+            RememberedFilter = null;
         }
     }
 }
