@@ -106,7 +106,7 @@ namespace ZjednodusenyUcetniDenik
 
         private void ExportItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Opravdu si přejete exportovat položky do csv na Vaši plochu?", "Export do csv", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Opravdu si přejete exportovat položky do csv?", "Export do csv", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 DownloadItemsAsCSVHelper();               
