@@ -38,9 +38,10 @@
                 <ColumnDefinition Width="210"/>
             </Grid.ColumnDefinitions>
 
-            <CheckBox Name="ItemTypeCheckBox" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
+            <CheckBox Name="ItemTypeCheckBox" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" ></CheckBox>
             <Label Content="Typ dokladu" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" />
-            <ComboBox Name="ItemTypeComboBox" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"  Margin="0,0,10,0" SelectedIndex="0" SelectedValuePath="Tag">
+            <ComboBox Name="ItemTypeComboBox" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"  Margin="0,0,10,0" SelectedIndex="0" 
+                      SelectedValuePath="Tag" IsEnabled="{Binding ElementName=ItemTypeCheckBox, Path=IsChecked}">
                 <ComboBoxItem Content="Příjem" Tag ="1" IsSelected="True"/>
                 <ComboBoxItem Content="Výdaj" Tag="2" />
                 <ComboBoxItem Content="Příjmy i výdaje" Tag="3" />
@@ -48,90 +49,108 @@
 
             <CheckBox Name="AmountCheckBox" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
             <Label Content="Částka od" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" />
-            <xctk:DoubleUpDown Name="AmountDoubleUpDownFrom" Watermark="Vlož částku" Grid.Row="1" Grid.Column="2" Increment=".01" FormatString="C2" Value="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" Margin="0,10" />
+            <xctk:DoubleUpDown Name="AmountDoubleUpDownFrom" Watermark="Vlož částku" Grid.Row="1" Grid.Column="2" Increment=".01" FormatString="C2" 
+                               Value="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" Margin="0,10" 
+                               IsEnabled="{Binding ElementName=AmountCheckBox, Path=IsChecked}"/>
             
             <Label Content="Částka do" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" />
-            <xctk:DoubleUpDown Name="AmountDoubleUpDownTo" Watermark="Vlož částku" Grid.Row="1" Grid.Column="4" Increment=".01" FormatString="C2" Value="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" Margin="0,10" />
+            <xctk:DoubleUpDown Name="AmountDoubleUpDownTo" Watermark="Vlož částku" Grid.Row="1" Grid.Column="4" Increment=".01" FormatString="C2" Value="0"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" Margin="0,10" 
+                               IsEnabled="{Binding ElementName=AmountCheckBox, Path=IsChecked}"/>
 
             <CheckBox  Name="InvoiceNumberCheckBox" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>    
             <Label Content="Číslo dokladu" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" />
             <TextBox Name="InvoiceNumberTextBox" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" Height="20" TextAlignment="Center"  
-                     Text =" " TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="0,10"/>
+                     Text =" " TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="0,10" 
+                     IsEnabled="{Binding ElementName=InvoiceNumberCheckBox, Path=IsChecked}"/>
 
             <CheckBox  Name="InvoiceDescriptionCheckBox" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>    
             <Label Content="Popis dokladu" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
-            <TextBox Name="InvoiceDescriptionTextBox" Grid.Row="3" Grid.Column="2" Height="20" TextAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="0,10" HorizontalAlignment="Left"/>
+            <TextBox Name="InvoiceDescriptionTextBox" Grid.Row="3" Grid.Column="2" Height="20" TextAlignment="Center"  TextWrapping="Wrap" 
+                     VerticalAlignment="Center" Width="200" Margin="0,10" HorizontalAlignment="Left" 
+                     IsEnabled="{Binding ElementName=InvoiceDescriptionCheckBox, Path=IsChecked}"/>
 
             <CheckBox  Name="ItemCategoryCheckBox" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>    
             <Label Content="Kategorie položky" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
-            <TextBox Name="ItemCategoryTextBox"  Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Height="20"  Grid.ColumnSpan="3" TextAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center" Width="440"/>
+            <TextBox Name="ItemCategoryTextBox"  Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Height="20"  Grid.ColumnSpan="3" 
+                     TextAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center" Width="440" 
+                     IsEnabled="{Binding ElementName=ItemCategoryCheckBox, Path=IsChecked}"/>
 
-            <CheckBox Name="InvoiceDateCheckBox" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>    
+            <CheckBox Name="InvoiceDateCheckBox" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Content="DUZP od" Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
-            <DatePicker Name="InvoiceDateDatePickerFrom" Grid.Row="5" Grid.Column="2" Margin="0,10" HorizontalAlignment="Left" />
+            <DatePicker Name="InvoiceDateDatePickerFrom" Grid.Row="5" Grid.Column="2" Margin="0,10" HorizontalAlignment="Left" 
+                        IsEnabled="{Binding ElementName=InvoiceDateCheckBox, Path=IsChecked}"/>
 
             <Label Content="DUZP do" Grid.Row="5" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
-            <DatePicker Name="InvoiceDateDatePickerTo" Grid.Row="5" Grid.Column="4" Margin="0,10" HorizontalAlignment="Left" />
+            <DatePicker Name="InvoiceDateDatePickerTo" Grid.Row="5" Grid.Column="4" Margin="0,10" HorizontalAlignment="Left" 
+                    IsEnabled="{Binding ElementName=InvoiceDateCheckBox, Path=IsChecked}"/>
 
             <CheckBox Name="DueDateCheckBox" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
             <Label Content="Datum splatnosti od" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
-            <DatePicker Name="DueDateDatePickerFrom" Grid.Row="6" Grid.Column="2" Margin="0,10" HorizontalAlignment="Left" />
+            <DatePicker Name="DueDateDatePickerFrom" Grid.Row="6" Grid.Column="2" Margin="0,10" HorizontalAlignment="Left" 
+                        IsEnabled="{Binding ElementName=DueDateCheckBox, Path=IsChecked}" />
 
             <Label Content="Datum splatnosti do" Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
-            <DatePicker Name="DueDateDatePickerTo" Grid.Row="6" Grid.Column="4" Margin="0,10" HorizontalAlignment="Left" />
+            <DatePicker Name="DueDateDatePickerTo" Grid.Row="6" Grid.Column="4" Margin="0,10" HorizontalAlignment="Left" 
+                    IsEnabled="{Binding ElementName=DueDateCheckBox, Path=IsChecked}"/>
 
-            <CheckBox Name="PaymentDateCheckBox" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
+            <CheckBox Name="PaymentDateCheckBox" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" ></CheckBox>
             <Label Content="Datum úhrady od" Grid.Row="7" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
-            <DatePicker Name="PaymentDateDatePickerFrom" Grid.Row="7" Grid.Column="2" Margin="0,10" HorizontalAlignment="Left" />
+            <DatePicker Name="PaymentDateDatePickerFrom" Grid.Row="7" Grid.Column="2" Margin="0,10" HorizontalAlignment="Left" 
+                    IsEnabled="{Binding ElementName=PaymentDateCheckBox, Path=IsChecked}" />
 
             <Label Content="Datum úhrady do" Grid.Row="7" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
-            <DatePicker Name="PaymentDateDatePickerTo" Grid.Row="7" Grid.Column="4" Margin="0,10" HorizontalAlignment="Left" />
+            <DatePicker Name="PaymentDateDatePickerTo" Grid.Row="7" Grid.Column="4" Margin="0,10" HorizontalAlignment="Left" 
+                    IsEnabled="{Binding ElementName=PaymentDateCheckBox, Path=IsChecked}"/>
 
-            <CheckBox Name="YearCheckBox" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
-            <Label Content="Účetní rok od" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" />
+            <CheckBox Name="YearCheckBox" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="Účetní rok od" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" />
             <xctk:IntegerUpDown Name="YearIntUpDownFrom" Grid.Row="8" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" 
-                                Margin="0,10" />
+                                Margin="0,10" IsEnabled="{Binding ElementName=YearCheckBox, Path=IsChecked}"/>
 
             <Label Content="Účetní rok do" Grid.Row="8" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" />
             <xctk:IntegerUpDown Name="YearIntUpDownTo" Grid.Row="8" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" 
-                                Margin="0,10" />
+                                Margin="0,10" IsEnabled="{Binding ElementName=YearCheckBox, Path=IsChecked}"/>
 
             <Label Content="Protistrana:" Grid.ColumnSpan="2" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
             <CheckBox Name="CounterpartyNameCheckBox" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
             <Label Content="Název" Grid.Row="10" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
             <TextBox Name="CounterpartyNameTextBox" Grid.Row="10" Grid.Column="2" HorizontalAlignment="Left" Height="20" TextAlignment="Center"  
-                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200"  Margin="0,10"/>
+                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200"  Margin="0,10" 
+                     IsEnabled="{Binding ElementName=CounterpartyNameCheckBox, Path=IsChecked}"/>
 
             <CheckBox Name="CounterpartyIdentificateNumberCheckBox" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
             <Label Content="IČ" Grid.Row="11" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
             <TextBox Name="CounterpartyIdentificateNumberTextBox" Grid.Row="11" Grid.Column="2" HorizontalAlignment="Left" Height="20" 
-                     TextAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="0,10"/>
+                     TextAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="0,10" 
+                     IsEnabled="{Binding ElementName=CounterpartyIdentificateNumberCheckBox, Path=IsChecked}"/>
 
             <CheckBox Name="CounterpartyTaxIdentityNumberCheckBox" Grid.Row="12" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
             <Label Content="DIČ" Grid.Row="12" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0,10"/>
             <TextBox Name="CounterpartyTaxIdentityNumberTextBox" Grid.Row="12" Grid.Column="2"  HorizontalAlignment="Left" Height="20" TextAlignment="Center" 
-                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="0,10"/>
+                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="0,10" 
+                     IsEnabled="{Binding ElementName=CounterpartyTaxIdentityNumberCheckBox, Path=IsChecked}"/>
 
             <CheckBox Name="CounterpartyStreetCheckBox" Grid.Row="13" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
             <Label Content="Ulice"  Grid.Row="13" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
             <TextBox Name="CounterpartyAddressStreetTextBox" Grid.Row="13" Grid.Column="2" HorizontalAlignment="Left" Height="20" TextAlignment="Center"  
-                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="0,10"/>
+                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="0,10" IsEnabled="{Binding ElementName=CounterpartyStreetCheckBox, Path=IsChecked}"/>
 
             <CheckBox Name="CounterpartyZipCodeCheckBox" Grid.Row="14" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
             <Label Content="PSČ" Grid.Row="14" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
             <TextBox Name="CounterpartyAddressZipCodeTextBox" Grid.Row="14" Grid.Column="2"  HorizontalAlignment="Left" Height="20" TextAlignment="Center"  
-                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200"  Margin="0,10"/>
+                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200"  Margin="0,10" IsEnabled="{Binding ElementName=CounterpartyZipCodeCheckBox, Path=IsChecked}"/>
 
             <CheckBox Name="CounterpartyAddressTownCheckBox" Grid.Row="15" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
             <Label Content="Město" Grid.Row="15" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
             <TextBox Name="CounterpartyAddressTownTextBox" Grid.Row="15" Grid.Column="2" HorizontalAlignment="Left" Height="20" TextAlignment="Center"  
-                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200"  Margin="0,10"/>
+                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200"  Margin="0,10" IsEnabled="{Binding ElementName=CounterpartyAddressTownCheckBox, Path=IsChecked}"/>
 
             <CheckBox Name="CounterpartyAddressStateCheckBox" Grid.Row="16" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
             <Label Content="Stát" Grid.Row="16" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10"/>
             <TextBox Name="CounterpartyAddressStateTextBox" Grid.Row="16" Grid.Column="2"  HorizontalAlignment="Left" Height="20" TextAlignment="Center"  
-                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200"  Margin="0,10"/>
+                     TextWrapping="Wrap" VerticalAlignment="Center" Width="200"  Margin="0,10" IsEnabled="{Binding ElementName=CounterpartyAddressStateCheckBox, Path=IsChecked}"/>
                  
 
         <StackPanel Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Right">

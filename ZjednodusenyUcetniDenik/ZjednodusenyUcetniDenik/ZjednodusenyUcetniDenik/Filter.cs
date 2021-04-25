@@ -27,12 +27,19 @@ namespace ZjednodusenyUcetniDenik
         public bool? CounterpartyAddressTownCheckBox { get; set; } = false;
         public bool? CounterpartyAddressStateCheckBox { get; set; } = false;
 
+        public double? AmountTo { get; private set; }
+        public DateTime? InvoiceDateTo { get; private set; } //DUZP
+        public DateTime? DueDateTo { get; private set; } //Datum splatnosti
+        public DateTime? PaymentDateTo { get; private set; } //Datum úhrady
+        public int? AccountingYearTo { get; private set; }
+
         public Filter(bool? itemTypeCheckBox, bool? amountCheckBox, bool? invoiceNumberCheckBox, bool? invoiceDescriptionCheckBox, bool? itemCategoryCheckBox,
             bool? invoiceDateCheckBox, bool? dueDateCheckBox, bool? paymentDateCheckBox, bool? yearCheckBox, bool? counterpartyNameCheckBox,
             bool? counterpartyIdentificateNumberCheckBox, bool? counterpartyTaxIdentityNumberCheckBox, bool? counterpartyStreetCheckBox, bool? counterpartyZipCodeCheckBox,
             bool? counterpartyAddressTownCheckBox, bool? counterpartyAddressStateCheckBox, string invoiceNumber, string invoiceDescription, string counterPartyName, 
             Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, 
-            DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount, int? accountingYear) : base(invoiceNumber, invoiceDescription, counterPartyName, 
+            DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount, int? accountingYear, double? amountTo, DateTime? invoiceDateTo,
+            DateTime? dueDateTo, DateTime? paymentDateTo, int? accountingYearTo ) : base(invoiceNumber, invoiceDescription, counterPartyName, 
               counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate,  paymentDate, itemCategory, 
               itemType, amount, accountingYear)
         {
@@ -52,6 +59,11 @@ namespace ZjednodusenyUcetniDenik
             CounterpartyZipCodeCheckBox = counterpartyZipCodeCheckBox;
             CounterpartyAddressTownCheckBox = counterpartyAddressTownCheckBox;
             CounterpartyAddressStateCheckBox = counterpartyAddressStateCheckBox;
+            AmountTo = amountTo;
+            InvoiceDateTo = invoiceDateTo;
+            DueDateTo = dueDateTo;
+            PaymentDateTo = paymentDateTo;
+            AccountingYearTo = accountingYearTo;
         }
 
         

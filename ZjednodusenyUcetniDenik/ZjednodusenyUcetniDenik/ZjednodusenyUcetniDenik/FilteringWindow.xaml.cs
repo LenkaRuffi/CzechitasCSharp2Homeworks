@@ -81,12 +81,18 @@ namespace ZjednodusenyUcetniDenik
                 CounterpartyNameCheckBox.IsChecked, CounterpartyIdentificateNumberCheckBox.IsChecked, CounterpartyTaxIdentityNumberCheckBox.IsChecked, CounterpartyStreetCheckBox.IsChecked,
                 CounterpartyZipCodeCheckBox.IsChecked, CounterpartyAddressTownCheckBox.IsChecked, CounterpartyAddressStateCheckBox.IsChecked, InvoiceNumberTextBox.Text, InvoiceDescriptionTextBox.Text,
                 CounterpartyNameTextBox.Text, counterPartyAdress, CounterpartyIdentificateNumberTextBox.Text, CounterpartyTaxIdentityNumberTextBox.Text, InvoiceDateDatePickerFrom.SelectedDate,
-                DueDateDatePickerFrom.SelectedDate, PaymentDateDatePickerFrom.SelectedDate, ItemCategoryTextBox.Text, (ItemType)item, AmountDoubleUpDownFrom.Value, YearIntUpDownFrom.Value);
-            
-           //chybí vsechna pole do
+                DueDateDatePickerFrom.SelectedDate, PaymentDateDatePickerFrom.SelectedDate, ItemCategoryTextBox.Text, (ItemType)item, AmountDoubleUpDownFrom.Value, YearIntUpDownFrom.Value, AmountDoubleUpDownTo.Value,
+                InvoiceDateDatePickerTo.SelectedDate, DueDateDatePickerTo.SelectedDate, PaymentDateDatePickerTo.SelectedDate, YearIntUpDownTo.Value);           
+           
         }
 
         private void setActualFilterToWindow()
+        {           
+            setCheckboxToActualFilterWindow();
+            setItemToActualFilterWindow();
+        }
+
+        private void setCheckboxToActualFilterWindow()
         {
             ItemTypeCheckBox.IsChecked = ActualFilter.ItemTypeCheckBox;
             AmountCheckBox.IsChecked = ActualFilter.AmountCheckBox;
@@ -104,23 +110,23 @@ namespace ZjednodusenyUcetniDenik
             CounterpartyZipCodeCheckBox.IsChecked = ActualFilter.CounterpartyZipCodeCheckBox;
             CounterpartyAddressTownCheckBox.IsChecked = ActualFilter.CounterpartyAddressTownCheckBox;
             CounterpartyAddressStateCheckBox.IsChecked = ActualFilter.CounterpartyAddressStateCheckBox;
-            InvoiceNumberTextBox.Text = ActualFilter.InvoiceNumber;
-
-            setItemToActualFilterWindow();
-
-
         }
+        
 
-        private void setItemToActualFilterWindow()
+            private void setItemToActualFilterWindow()
         {
             ItemTypeComboBox.SelectedValue = (int)ActualFilter.ItemType;
             AmountDoubleUpDownFrom.Value = ActualFilter.Amount;
+            AmountDoubleUpDownTo.Value = ActualFilter.AmountTo;
             InvoiceNumberTextBox.Text = ActualFilter.InvoiceNumber;
             InvoiceDescriptionTextBox.Text = ActualFilter.InvoiceDescription;
             ItemCategoryTextBox.Text = ActualFilter.ItemCategory;
             InvoiceDateDatePickerFrom.SelectedDate = ActualFilter.InvoiceDate;
+            InvoiceDateDatePickerTo.SelectedDate = ActualFilter.InvoiceDateTo;
             DueDateDatePickerFrom.SelectedDate = ActualFilter.DueDate;
+            DueDateDatePickerTo.SelectedDate = ActualFilter.DueDateTo;
             PaymentDateDatePickerFrom.SelectedDate = ActualFilter.PaymentDate;
+            PaymentDateDatePickerTo.SelectedDate = ActualFilter.PaymentDateTo;
             CounterpartyNameTextBox.Text = ActualFilter.CounterpartyName;
             CounterpartyIdentificateNumberTextBox.Text = ActualFilter.CounterpartyIdentificateNumber;
             CounterpartyTaxIdentityNumberTextBox.Text = ActualFilter.CounterpartyTaxIdentityNumber;
@@ -129,6 +135,10 @@ namespace ZjednodusenyUcetniDenik
             CounterpartyAddressTownTextBox.Text = ActualFilter.CounterPartyAddress.Town;
             CounterpartyAddressStateTextBox.Text = ActualFilter.CounterPartyAddress.State;
             YearIntUpDownFrom.Value = ActualFilter.AccountingYear;
+            YearIntUpDownTo.Value = ActualFilter.AccountingYearTo;
+
         }
+
+
     }
 }
