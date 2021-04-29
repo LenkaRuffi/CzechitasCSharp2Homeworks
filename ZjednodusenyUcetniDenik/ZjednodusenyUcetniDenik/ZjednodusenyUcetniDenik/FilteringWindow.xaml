@@ -44,7 +44,6 @@
                       SelectedValuePath="Tag" IsEnabled="{Binding ElementName=ItemTypeCheckBox, Path=IsChecked}">
                 <ComboBoxItem Content="Příjem" Tag ="1" IsSelected="True"/>
                 <ComboBoxItem Content="Výdaj" Tag="2" />
-                <ComboBoxItem Content="Příjmy i výdaje" Tag="3" />
             </ComboBox>
 
             <CheckBox Name="AmountCheckBox" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>

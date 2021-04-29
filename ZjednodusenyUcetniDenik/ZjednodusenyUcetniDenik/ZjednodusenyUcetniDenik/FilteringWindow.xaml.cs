@@ -37,13 +37,89 @@ namespace ZjednodusenyUcetniDenik
 
         public void FilteringItems() //na lekci by mel vitek vysvetlit linq, tak aby se daly vrstvit dotazy, takze bych pak podle ifu to mela byt schopna vyfiltrovat do ienumerable
         {
-            if (CounterpartyNameCheckBox.IsChecked == true)
+            selectedItems = accountingBook.AccountingBookItems; //toto nečekaně bude mit na konci zase vsechny polozky pokud ani jeden filtr nebude true
+                                                                                  //ještě přemýšlím, jestli není lepší použít FilteredObservableCollection a filter nastavit v ní
+
+            //vytvorit pomocnej seznam, do kteryho na zacatku nahraji data, ten pak necham projet pres ify a budu muset vymyslet, jak udelat podminku, ze pomocny seznam preklopim do selected item
+            /*if (CounterpartyNameCheckBox.IsChecked == true)
             {
                 selectedItems =
                 from Item in accountingBook.AccountingBookItems
                 where Item.CounterpartyName == CounterpartyNameTextBox.Text
                 select Item;
+            }*/
+
+            //toto se pry pise takto kvuli prehlednosti
+
+            
+            if (ItemTypeCheckBox.IsChecked == true) 
+            { 
+               int selectedValue = int.Parse((string)ItemTypeComboBox.SelectedValue);
+
+                selectedItems = selectedItems.Where(i => (int)i.ItemType == selectedValue).Select(i => i); 
             }
+            if (AmountCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.Amount >= IfNullReturnMaxDouble(AmountDoubleUpDownFrom.Value) && i.Amount <= IfNullReturnMaxDouble(AmountDoubleUpDownTo.Value)).Select(i => i); }
+            if (InvoiceNumberCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceNumber == InvoiceNumberTextBox.Text).Select(i => i); }
+            if (InvoiceDescriptionCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceNumber == InvoiceDescriptionTextBox.Text).Select(i => i); }
+            if (ItemCategoryCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceNumber == ItemCategoryTextBox.Text).Select(i => i); }
+            // opravit date - if (InvoiceDateCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceNumber == ItemCategoryTextBox.Text).Select(i => i); }
+
+
+            if (YearCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.AccountingYear >= IfNullReturnMaxDouble(YearIntUpDownFrom.Value) && i.AccountingYear <= IfNullReturnMaxDouble(YearIntUpDownTo.Value)).Select(i => i); }
+            if (CounterpartyNameCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterpartyName == CounterpartyNameTextBox.Text).Select(i => i); }
+            if (CounterpartyIdentificateNumberCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterpartyIdentificateNumber == CounterpartyIdentificateNumberTextBox.Text).Select(i => i); }
+            if (CounterpartyTaxIdentityNumberCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterpartyTaxIdentityNumber == CounterpartyIdentificateNumberTextBox.Text).Select(i => i); }
+            if (CounterpartyStreetCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterPartyAddress.Street == CounterPartyStreetTextBox.Text).Select(i => i); }
+            
+            /*
+
+             DueDateCheckBox.IsChecked = ActualFilter.DueDateCheckBox;
+             PaymentDateCheckBox.IsChecked = ActualFilter.PaymentDateCheckBox;
+             
+            
+             CounterpartyStreetCheckBox.IsChecked = ActualFilter.CounterpartyStreetCheckBox;
+             CounterpartyZipCodeCheckBox.IsChecked = ActualFilter.CounterpartyZipCodeCheckBox;
+             CounterpartyAddressTownCheckBox.IsChecked = ActualFilter.CounterpartyAddressTownCheckBox;
+             CounterpartyAddressStateCheckBox.IsChecked = ActualFilter.CounterpartyAddressStateCheckBox;*/
+
+
+
+
+
+
+            /* No ty když uděláš linq dotaz, třeba var položky = seznam.where(i => i.JeNeco);
+             Poslal(a) Jaroslav, Dnes v 20:03
+ Pak máš test, jestli je zapnutý další filtr a je znovu
+ Poslal(a) Jaroslav, Dnes v 20:03
+ Položky = položky.where(i => I.NecoJineho);
+             Poslal(a) Jaroslav, Dnes v 20:03
+ A po všech testech je foreach
+ Poslal(a) Jaroslav, Dnes v 20:03
+ Takže retezis linq a on se vyhodnotí až na závěr
+ Poslal(a) Jaroslav, Dnes v 20:03
+ To je totiž u linq důležité vědět, on se vyhodnotí až v cyklu nebo když dáš.To list apod
+ Poslal(a) Jaroslav, Dnes v 20:03
+ On se ne vyhodnotí když ho napises
+ Poslal(a) Jaroslav, Dnes v 20:03
+ Le až ho procházís
+ Poslal(a) Jaroslav, Dnes v 20:03
+ Takže můžeš jakoby pořád nastavovat další části linqu
+ Poslal(a) Jaroslav, Dnes v 20:03
+ Proto ti to pomuze
+ Poslal(a) Jaroslav, Dnes v 20:03
+ Bude to rychle a přitom elegantní, bude to mít vyfiltrovane vlastně až na konec kompletně z jednoho linqu který postupně vznikl
+ Posláno Dnes v 20:05
+ Nad tím se musím zamyslet, až vítá domluví
+ Posláno Dnes v 20:08
+ Měla jsem to nějak jinak namysleny ale asi sloziteji
+
+ Poslal(a) Jaroslav, Dnes v 20:11
+ proste to bude
+ if (prvniFiltr) polozky = polozky.Where(p => p.Cislo == hodnotaPrvnihoFiltru);
+             if (druhyFiltr) polozky = polozky.Where(p => p.Adresa == hodnotaAdresy);
+             ....vyfiltrovanePolozky = polozky.ToList();
+             Poslal(a) Jaroslav, Dnes v 20:11
+ mozna to nemam uplne dobre pojmenovany, misto polozky by melo byt filtrovaniPolozek treba, jako ze je to aplikace toho linqu*/
 
         }
 
@@ -137,6 +213,11 @@ namespace ZjednodusenyUcetniDenik
             YearIntUpDownFrom.Value = ActualFilter.AccountingYear;
             YearIntUpDownTo.Value = ActualFilter.AccountingYearTo;
 
+        }
+
+        private double? IfNullReturnMaxDouble (double? value)
+        {
+            return value == null ? double.MaxValue : value;
         }
 
 
