@@ -35,57 +35,32 @@ namespace ZjednodusenyUcetniDenik
            
         }
 
-        public void FilteringItems() //na lekci by mel vitek vysvetlit linq, tak aby se daly vrstvit dotazy, takze bych pak podle ifu to mela byt schopna vyfiltrovat do ienumerable
+        public void FilteringItems() 
         {
-            selectedItems = accountingBook.AccountingBookItems; //toto nečekaně bude mit na konci zase vsechny polozky pokud ani jeden filtr nebude true
-                                                                                  //ještě přemýšlím, jestli není lepší použít FilteredObservableCollection a filter nastavit v ní
-
-            //vytvorit pomocnej seznam, do kteryho na zacatku nahraji data, ten pak necham projet pres ify a budu muset vymyslet, jak udelat podminku, ze pomocny seznam preklopim do selected item
-            /*if (CounterpartyNameCheckBox.IsChecked == true)
-            {
-                selectedItems =
-                from Item in accountingBook.AccountingBookItems
-                where Item.CounterpartyName == CounterpartyNameTextBox.Text
-                select Item;
-            }*/
-
-            //toto se pry pise takto kvuli prehlednosti
-
-            
+            selectedItems = accountingBook.AccountingBookItems; 
+           
             if (ItemTypeCheckBox.IsChecked == true) 
-            { 
-               int selectedValue = int.Parse((string)ItemTypeComboBox.SelectedValue);
-
-                selectedItems = selectedItems.Where(i => (int)i.ItemType == selectedValue).Select(i => i); 
+            {
+                int selectedValue = int.Parse(ItemTypeComboBox.SelectedValue.ToString());               
+                selectedItems = selectedItems.Where(i => (int)i.ItemType == selectedValue).Select(i => i);
             }
-            if (AmountCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.Amount >= IfNullReturnMaxDouble(AmountDoubleUpDownFrom.Value) && i.Amount <= IfNullReturnMaxDouble(AmountDoubleUpDownTo.Value)).Select(i => i); }
-            if (InvoiceNumberCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceNumber == InvoiceNumberTextBox.Text).Select(i => i); }
-            if (InvoiceDescriptionCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceNumber == InvoiceDescriptionTextBox.Text).Select(i => i); }
-            if (ItemCategoryCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceNumber == ItemCategoryTextBox.Text).Select(i => i); }
-            // opravit date - if (InvoiceDateCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceNumber == ItemCategoryTextBox.Text).Select(i => i); }
-
-
-            if (YearCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.AccountingYear >= IfNullReturnMaxDouble(YearIntUpDownFrom.Value) && i.AccountingYear <= IfNullReturnMaxDouble(YearIntUpDownTo.Value)).Select(i => i); }
-            if (CounterpartyNameCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterpartyName == CounterpartyNameTextBox.Text).Select(i => i); }
-            if (CounterpartyIdentificateNumberCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterpartyIdentificateNumber == CounterpartyIdentificateNumberTextBox.Text).Select(i => i); }
-            if (CounterpartyTaxIdentityNumberCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterpartyTaxIdentityNumber == CounterpartyIdentificateNumberTextBox.Text).Select(i => i); }
-            if (CounterpartyStreetCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterPartyAddress.Street == CounterPartyStreetTextBox.Text).Select(i => i); }
+            if (AmountCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.Amount >= IfNullReturnMinDouble(AmountDoubleUpDownFrom.Value) && i.Amount <= IfNullReturnMaxDouble(AmountDoubleUpDownTo.Value)).Select(i => i); }
+            if (InvoiceNumberCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceNumber.Trim().Equals(InvoiceNumberTextBox.Text.Trim())).Select(i => i); }
+            if (InvoiceDescriptionCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceDescription.Trim().Equals(InvoiceDescriptionTextBox.Text.Trim())).Select(i => i); }
+            if (ItemCategoryCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.ItemCategory.Trim().Equals(ItemCategoryTextBox.Text.Trim())).Select(i => i); }
+            if (InvoiceDateCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.InvoiceDate >= IfNullReturnMinDate(InvoiceDateDatePickerFrom.SelectedDate) && i.InvoiceDate <= IfNullReturnMaxDate(InvoiceDateDatePickerTo.SelectedDate)).Select(i => i); }
+            if (DueDateCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.DueDate >= IfNullReturnMinDate(DueDateDatePickerFrom.SelectedDate) && i.DueDate <= IfNullReturnMaxDate(DueDateDatePickerTo.SelectedDate)).Select(i => i); }
+            if (PaymentDateCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.PaymentDate >= IfNullReturnMinDate(PaymentDateDatePickerFrom.SelectedDate) && i.PaymentDate <= IfNullReturnMaxDate(PaymentDateDatePickerTo.SelectedDate)).Select(i => i); }
+            if (YearCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.AccountingYear >= IfNullReturnMinDouble(YearIntUpDownFrom.Value) && i.AccountingYear <= IfNullReturnMaxDouble(YearIntUpDownTo.Value)).Select(i => i); }
+            if (CounterpartyNameCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterpartyName.Trim().Equals(CounterpartyNameTextBox.Text.Trim())).Select(i => i); }
+            if (CounterpartyIdentificateNumberCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterpartyIdentificateNumber.Trim().Equals(CounterpartyIdentificateNumberTextBox.Text.Trim())).Select(i => i); }
+            if (CounterpartyTaxIdentityNumberCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterpartyTaxIdentityNumber.Trim().Equals(CounterpartyTaxIdentityNumberTextBox.Text.Trim())).Select(i => i); }
+            if (CounterpartyStreetCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterPartyAddress.Street.Trim().Equals(CounterpartyAddressStreetTextBox.Text.Trim())).Select(i => i); }
+            if (CounterpartyZipCodeCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterPartyAddress.ZipCode.Trim().Equals(CounterpartyAddressZipCodeTextBox.Text.Trim())).Select(i => i); }
+            if (CounterpartyAddressTownCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterPartyAddress.Town.Trim().Equals(CounterpartyAddressTownTextBox.Text.Trim())).Select(i => i); }
+            if (CounterpartyAddressStateCheckBox.IsChecked == true) { selectedItems = selectedItems.Where(i => i.CounterPartyAddress.State.Trim().Equals(CounterpartyAddressStateTextBox.Text.Trim())).Select(i => i); }
             
-            /*
-
-             DueDateCheckBox.IsChecked = ActualFilter.DueDateCheckBox;
-             PaymentDateCheckBox.IsChecked = ActualFilter.PaymentDateCheckBox;
-             
-            
-             CounterpartyStreetCheckBox.IsChecked = ActualFilter.CounterpartyStreetCheckBox;
-             CounterpartyZipCodeCheckBox.IsChecked = ActualFilter.CounterpartyZipCodeCheckBox;
-             CounterpartyAddressTownCheckBox.IsChecked = ActualFilter.CounterpartyAddressTownCheckBox;
-             CounterpartyAddressStateCheckBox.IsChecked = ActualFilter.CounterpartyAddressStateCheckBox;*/
-
-
-
-
-
+           
 
             /* No ty když uděláš linq dotaz, třeba var položky = seznam.where(i => i.JeNeco);
              Poslal(a) Jaroslav, Dnes v 20:03
@@ -134,18 +109,6 @@ namespace ZjednodusenyUcetniDenik
         {
             Close();
         }
-
-        /*public void Test(CheckBox checkBox, TextBox textBox )
-        {
-            if(checkBox.IsChecked == true)
-            {
-                selectedItems =
-              from Item in accountingBook.AccountingBookItems
-              where Item.CounterpartyName == textBox.Text
-              select Item;
-            }
-          
-        }*/
 
         private void setActualFilter()
         {
@@ -220,6 +183,21 @@ namespace ZjednodusenyUcetniDenik
             return value == null ? double.MaxValue : value;
         }
 
+        private double? IfNullReturnMinDouble(double? value)
+        {
+            return value == null ? double.MinValue : value;
+        }
+
+        private DateTime? IfNullReturnMaxDate(DateTime? value)
+        {
+            return value == null ? DateTime.MaxValue : value;
+        }
+
+
+        private DateTime? IfNullReturnMinDate(DateTime? value)
+        {
+            return value == null ? DateTime.MinValue : value;
+        }
 
     }
 }

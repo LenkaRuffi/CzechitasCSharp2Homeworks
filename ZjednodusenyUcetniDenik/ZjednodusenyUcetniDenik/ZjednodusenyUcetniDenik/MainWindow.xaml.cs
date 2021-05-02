@@ -175,6 +175,7 @@ namespace ZjednodusenyUcetniDenik
             FilteringWindow filterItemWindow = new FilteringWindow(accountingBook, RememberedFilter);
             filterItemWindow.ShowDialog();
             selectedItems = filterItemWindow.selectedItems;
+            SetSumTextBoxes();
             if(selectedItems != null)
             {
                 ItemDataGrid.ItemsSource = selectedItems;
