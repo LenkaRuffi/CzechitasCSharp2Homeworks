@@ -45,7 +45,7 @@ namespace ZjednodusenyUcetniDenik
             YearIntUpDown.Value = selectedItem.AccountingYear;
         }
 
-        private void okButton_Click(object sender, RoutedEventArgs e)
+        private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {                
@@ -60,5 +60,6 @@ namespace ZjednodusenyUcetniDenik
             }
 
 }
+
     }
 }

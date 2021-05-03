@@ -41,7 +41,6 @@ namespace ZjednodusenyUcetniDenik
             AccountingYear = accountingYear;
         }
 
-
         public void EditWholeItem(string invoiceNumber, string invoiceDescription, string counterPartyName, Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount)
         {
             InvoiceNumber = invoiceNumber;

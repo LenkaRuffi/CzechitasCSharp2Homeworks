@@ -23,7 +23,7 @@ namespace ZjednodusenyUcetniDenik
     /// </summary>
     public partial class MainWindow : Window
     {
-        AccountingBook accountingBook = new AccountingBook();
+        AccountingBook accountingBook;
         IEnumerable<Item> selectedItems;
         string pathToCommonAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
         string AppName = "ZjednodusenyUcetniDenik";
@@ -34,8 +34,9 @@ namespace ZjednodusenyUcetniDenik
         public MainWindow()
         {
             InitializeComponent();
+            accountingBook = new AccountingBook();
             pathToCsvDatabaseData = System.IO.Path.Combine(pathToCommonAppData, AppName, database);
-            checkAndLoadDataIfDbDirectoryExistElseCreate();
+            CheckAndLoadDataIfDbDirectoryExistElseCreate();
             DataContext = accountingBook;
             ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
@@ -45,43 +46,35 @@ namespace ZjednodusenyUcetniDenik
         private void buttonFiltering_Click(object sender, RoutedEventArgs e)
         {
             int ItemTypeConvert = int.Parse(ItemTypeComboBox.SelectedValue.ToString());
+            bool itemsWasFiltered = false;
 
-            if (YearIntUpDown.Value != null && ItemTypeConvert == 0)
+            if (selectedItems == null)
             {
-                selectedItems =
-                            from Item in accountingBook.AccountingBookItems
-                            where Item.AccountingYear == YearIntUpDown.Value
-                            select Item;
-                ItemDataGrid.ItemsSource = selectedItems;
+                selectedItems = accountingBook.AccountingBookItems;
             }
-            else if (YearIntUpDown.Value == null && ItemTypeConvert != 0)
+
+            if (ItemTypeConvert != 0)
             {                
-                selectedItems =
-                           from Item in accountingBook.AccountingBookItems
-                           where (int)Item.ItemType == ItemTypeConvert
-                           select Item;
-                ItemDataGrid.ItemsSource = selectedItems;
+                selectedItems = selectedItems.Where(i => (int)i.ItemType == ItemTypeConvert).Select(i => i);
+                itemsWasFiltered = true;
             }
-            else if (YearIntUpDown.Value != null && ItemTypeConvert != 0)
-            {               
-                selectedItems =
-                              from Item in accountingBook.AccountingBookItems
-                              where Item.AccountingYear == YearIntUpDown.Value
-                              select Item;
+            if (YearIntUpDown.Value != null) 
+            { 
+                selectedItems = selectedItems.Where(i => i.AccountingYear == YearIntUpDown.Value).Select(i => i); 
+                itemsWasFiltered = true; 
+            }            
 
-                selectedItems =
-                              from Item in selectedItems
-                              where (int)Item.ItemType == ItemTypeConvert
-                              select Item;
-
-                ItemDataGrid.ItemsSource = selectedItems;
+            if (!itemsWasFiltered)
+            {
+                selectedItems = null;
+                ClearFilter();
             }
-
             else
             {
-                clearFilter();
+                ItemDataGrid.ItemsSource = selectedItems;
             }
-            SetSumTextBoxes();            
+            
+            SetSumTextBoxes();   
         }
 
        
@@ -117,11 +110,7 @@ namespace ZjednodusenyUcetniDenik
         
 
         private void DownloadItemsAsCSVHelper()
-        {
-           /* string filename = "ucetniDenik.csv";
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string completePath = System.IO.Path.Combine(filePath, filename); */
-            
+        {           
             try
             {
                 Microsoft.Win32.SaveFileDialog saveDialog = new Microsoft.Win32.SaveFileDialog()                
@@ -137,7 +126,7 @@ namespace ZjednodusenyUcetniDenik
                 {
                     
                     filename = saveDialog.FileName;
-                    using (StreamWriter sw = new StreamWriter(/*completePath*/ filename, false, Encoding.UTF8))
+                    using (StreamWriter sw = new StreamWriter(filename, false, Encoding.UTF8))
                     using (var csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
                     {
                         if (selectedItems == null)
@@ -148,13 +137,8 @@ namespace ZjednodusenyUcetniDenik
                         {
                             csv.WriteRecords(selectedItems);
                         }
-
-                       // MessageBox.Show("Položky byly exportovány");
                     }
-
-                }
-
-               
+                }               
             }
             catch (Exception ex)
             {
@@ -162,32 +146,28 @@ namespace ZjednodusenyUcetniDenik
             }
         }
 
-        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
         {
-            clearFilter();
-            YearIntUpDown.Value = null;
-            ItemTypeComboBox.SelectedValue = "0";
-
+            ClearFilter();
         }
 
-        private void FilterButton_Click(object sender, RoutedEventArgs e)
+        private void FilterButtonInToolBar_Click(object sender, RoutedEventArgs e)
         {
-            FilteringWindow filterItemWindow = new FilteringWindow(accountingBook, RememberedFilter);
+            FilteringWindow filterItemWindow = new FilteringWindow(accountingBook, RememberedFilter, selectedItems);
             filterItemWindow.ShowDialog();
-            selectedItems = filterItemWindow.selectedItems;
+            selectedItems = filterItemWindow.SelectedItems;
             SetSumTextBoxes();
             if(selectedItems != null)
             {
                 ItemDataGrid.ItemsSource = selectedItems;
                 FilterButton.Background = Brushes.Gray;
-                RememberedFilter = filterItemWindow.ActualFilter;
-                //ItemDataGrid.Items.Refresh();
+                RememberedFilter = filterItemWindow.ActualFilter;               
             }
         }
 
-        private void FilterClearButton_Click(object sender, RoutedEventArgs e)
+        private void FilterClearButtonInToolBar_Click(object sender, RoutedEventArgs e)
         {
-            clearFilter();
+            ClearFilter();
         }
 
         private void EditItemButton_Click(object sender, RoutedEventArgs e)
@@ -236,8 +216,7 @@ namespace ZjednodusenyUcetniDenik
                 else
                 {
                     MessageBox.Show("Položka nebyla odstraněna.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Information);
-                }                
-
+                }  
             }
 
             SetSumTextBoxes();
@@ -259,8 +238,7 @@ namespace ZjednodusenyUcetniDenik
         }
 
         private void LoadData()
-        {
-            
+        {            
             CsvHelper.Configuration.CsvConfiguration csvConfiguration = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 PrepareHeaderForMatch = args => args.Header.ToLower(),
@@ -276,11 +254,10 @@ namespace ZjednodusenyUcetniDenik
                 {
                     accountingBook.AccountingBookItems.Add(item);
                 }
-
             }
         }
 
-        private void checkAndLoadDataIfDbDirectoryExistElseCreate()
+        private void CheckAndLoadDataIfDbDirectoryExistElseCreate()
         {
             if (File.Exists(pathToCsvDatabaseData)) 
             {
@@ -290,7 +267,6 @@ namespace ZjednodusenyUcetniDenik
             {
                 Directory.CreateDirectory(System.IO.Path.GetDirectoryName(pathToCsvDatabaseData));
             }
-
         }
 
         private void SaveItemsAsCSVHelper()
@@ -309,13 +285,15 @@ namespace ZjednodusenyUcetniDenik
             }
         }
 
-        private void clearFilter()
+        private void ClearFilter()
         {
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
             selectedItems = null;
             SetSumTextBoxes();
             FilterButton.Background = Brushes.Transparent;
             RememberedFilter = null;
+            YearIntUpDown.Value = null;
+            ItemTypeComboBox.SelectedValue = "0";
         }
     }
 }

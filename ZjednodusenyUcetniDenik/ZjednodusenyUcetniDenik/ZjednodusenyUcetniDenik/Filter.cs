@@ -8,8 +8,6 @@ namespace ZjednodusenyUcetniDenik
 {
     public class Filter : Item
     {
-        //public Item actualFilteredDataItem { get; set; }
-
         public bool? ItemTypeCheckBox { get; set; } = false;
         public bool? AmountCheckBox { get; set; } = false;
         public bool? InvoiceNumberCheckBox { get; set; } = false;
@@ -40,8 +38,8 @@ namespace ZjednodusenyUcetniDenik
             Address counterPartyAddress, string counterpartyIdentificateNumber, string counterpartyTaxIdentityNumber, DateTime? invoiceDate, DateTime? dueDate, 
             DateTime? paymentDate, string itemCategory, ItemType itemType, double? amount, int? accountingYear, double? amountTo, DateTime? invoiceDateTo,
             DateTime? dueDateTo, DateTime? paymentDateTo, int? accountingYearTo ) : base(invoiceNumber, invoiceDescription, counterPartyName, 
-              counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate,  paymentDate, itemCategory, 
-              itemType, amount, accountingYear)
+            counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate,  paymentDate, itemCategory, 
+            itemType, amount, accountingYear)
         {
             ItemTypeCheckBox = itemTypeCheckBox;
             AmountCheckBox = amountCheckBox;
@@ -64,10 +62,6 @@ namespace ZjednodusenyUcetniDenik
             DueDateTo = dueDateTo;
             PaymentDateTo = paymentDateTo;
             AccountingYearTo = accountingYearTo;
-        }
-
-        
-
-          
+        }          
     }
 }
