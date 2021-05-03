@@ -25,7 +25,7 @@ namespace ZjednodusenyUcetniDenik
     {
         AccountingBook accountingBook;
         IEnumerable<Item> selectedItems;
-        string pathToCommonAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+        string pathToCommonAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData); //C:\ProgramData
         string AppName = "ZjednodusenyUcetniDenik";
         string database = "databaze.csv";
         string pathToCsvDatabaseData;
@@ -105,9 +105,7 @@ namespace ZjednodusenyUcetniDenik
             {
                 DownloadItemsAsCSVHelper();               
             }
-        }
-
-        
+        }        
 
         private void DownloadItemsAsCSVHelper()
         {           
@@ -176,6 +174,7 @@ namespace ZjednodusenyUcetniDenik
             {
                 EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem);
                 editItemWindow.ShowDialog();
+                SaveItemsAsCSVHelper();
                 ItemDataGrid.Items.Refresh();
             }
             else
@@ -190,6 +189,7 @@ namespace ZjednodusenyUcetniDenik
         {
             AddItemWindow addItemWindow = new AddItemWindow(accountingBook);
             addItemWindow.ShowDialog();
+            SaveItemsAsCSVHelper();
             SetSumTextBoxes();
         }
 
@@ -206,6 +206,7 @@ namespace ZjednodusenyUcetniDenik
                 if (result == MessageBoxResult.Yes && ItemDataGrid.SelectedItem != null)
                 {
                     accountingBook.RemoveItem((Item)ItemDataGrid.SelectedItem);
+                    SaveItemsAsCSVHelper();
                     if (selectedItems != null)
                     {
                         selectedItems = selectedItems.Where(i => i != ItemDataGrid.SelectedItem).ToList();
