@@ -170,28 +170,47 @@ namespace L9Ukol
             // Z puvodniho seznamu zakazniku vyber milionare a vytvor z nich seznam novych zakazniku,
             // kteri budou mit stejne jmeno a stav uctu (balance), ale banka bude obsahovat plne jmeno
             // podle seznamu bank
-            List<Customer> millionaireReport;
+            List<Customer> millionaireReport = new List<Customer>();
 
             List<Customer> milionare = customers.Where(c => c.Balance > 1000000).ToList();
 
-            millionaireReport = (from m in milionare
+            /*millionaireReport = from m in milionare
                                  join b in banks
-                                     on m.Bank equals b.Symbol,
-                                   
-                       (m, b) => new
-                       {
-                           Name = m.name,
-                           Balance = m.Balance,
-                           BankName = b.Name
+                                     on m.Bank equals b.Symbol
+                                 select new{ name = m.Name, 
+                                        m.Balance, b.Name};*/
 
-                       });
-                      
-            
+ 
+
+         var millionaireReport2 = milionare.Join(banks,
+                m => m.Bank,
+                b => b.Symbol, (millionare, bank) => new
+                {
+                    Name = millionare.Name,
+                    Balance = millionare.Balance,
+                    Bank = bank.Name
+                });
+
+            foreach(var item in millionaireReport2)
+            {
+                Customer newItem = new Customer() { Name = item.Name, Balance = item.Balance, Bank = item.Bank };
+                millionaireReport.Add(newItem);
+            }
+
+
+            //millionaireReport = millionaireReport2;          
 
             foreach (Customer customer in millionaireReport)
+            {
+                Console.WriteLine($"{customer.Name} at {customer.Bank}");
+            };
+
+            Console.WriteLine();
+
+            foreach (var customer in millionaireReport2)
               {
                   Console.WriteLine($"{customer.Name} at {customer.Bank}");
-              } 
+              };
 
 
             // Zdroj (a reseni)
