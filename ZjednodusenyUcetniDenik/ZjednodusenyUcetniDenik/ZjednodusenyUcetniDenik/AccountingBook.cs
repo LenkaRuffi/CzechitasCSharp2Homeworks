@@ -51,7 +51,7 @@ namespace ZjednodusenyUcetniDenik
         {
             if (invoiceDescription.Length < 3)
             {
-                throw new ArgumentException("Popis faktury je příliš krátký");
+                throw new ArgumentException("Popis dokladu je příliš krátký");
             }
           
             Item newItem = new Item(invoiceNumber, invoiceDescription, counterPartyName, counterPartyAddress, counterpartyIdentificateNumber, counterpartyTaxIdentityNumber, invoiceDate, dueDate, paymentDate, itemCategory, itemType, amount, year);

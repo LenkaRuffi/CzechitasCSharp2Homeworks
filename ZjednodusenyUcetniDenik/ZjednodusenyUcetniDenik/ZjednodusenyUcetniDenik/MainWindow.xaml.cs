@@ -24,19 +24,17 @@ namespace ZjednodusenyUcetniDenik
     public partial class MainWindow : Window
     {
         AccountingBook accountingBook;
-        IEnumerable<Item> selectedItems;
-        string pathToCommonAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData); //C:\ProgramData
-        string AppName = "ZjednodusenyUcetniDenik";
-        string database = "databaze.csv";
-        string pathToCsvDatabaseData;
+        IEnumerable<Item> selectedItems;       
         Filter RememberedFilter;
+        LoadAndSaveData LoadingAndSaving;
 
         public MainWindow()
         {
             InitializeComponent();
             accountingBook = new AccountingBook();
-            pathToCsvDatabaseData = System.IO.Path.Combine(pathToCommonAppData, AppName, database);
-            CheckAndLoadDataIfDbDirectoryExistElseCreate();
+            LoadingAndSaving = new LoadAndSaveData();            
+            LoadingAndSaving.CheckAndLoadDataIfDbDirectoryExistElseCreate();
+            accountingBook = LoadingAndSaving.workingAccountingBook;
             DataContext = accountingBook;
             ItemDataGrid.DataContext = accountingBook.AccountingBookItems;
             ItemDataGrid.ItemsSource = accountingBook.AccountingBookItems;
@@ -93,7 +91,7 @@ namespace ZjednodusenyUcetniDenik
             }
             else
             {
-                SaveItemsAsCSVHelper();
+                LoadingAndSaving.SaveItemsAsCSVHelper(accountingBook);
             }
 
         }
@@ -174,7 +172,7 @@ namespace ZjednodusenyUcetniDenik
             {
                 EditItemWindow editItemWindow = new EditItemWindow((Item)ItemDataGrid.SelectedItem);
                 editItemWindow.ShowDialog();
-                SaveItemsAsCSVHelper();
+                LoadingAndSaving.SaveItemsAsCSVHelper(accountingBook);
                 ItemDataGrid.Items.Refresh();
             }
             else
@@ -189,7 +187,7 @@ namespace ZjednodusenyUcetniDenik
         {
             AddItemWindow addItemWindow = new AddItemWindow(accountingBook);
             addItemWindow.ShowDialog();
-            SaveItemsAsCSVHelper();
+            LoadingAndSaving.SaveItemsAsCSVHelper(accountingBook);
             SetSumTextBoxes();
         }
 
@@ -206,7 +204,7 @@ namespace ZjednodusenyUcetniDenik
                 if (result == MessageBoxResult.Yes && ItemDataGrid.SelectedItem != null)
                 {
                     accountingBook.RemoveItem((Item)ItemDataGrid.SelectedItem);
-                    SaveItemsAsCSVHelper();
+                    LoadingAndSaving.SaveItemsAsCSVHelper(accountingBook);
                     if (selectedItems != null)
                     {
                         selectedItems = selectedItems.Where(i => i != ItemDataGrid.SelectedItem).ToList();
@@ -234,56 +232,7 @@ namespace ZjednodusenyUcetniDenik
             {
                 IncomeSumTextBox.Text = accountingBook.SumIncome.ToString();
                 CostSumTextBox.Text = accountingBook.SumCost.ToString();
-            }
-          
-        }
-
-        private void LoadData()
-        {            
-            CsvHelper.Configuration.CsvConfiguration csvConfiguration = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                PrepareHeaderForMatch = args => args.Header.ToLower(),
-            };
-
-            using (StreamReader reader = new StreamReader(pathToCsvDatabaseData))
-            using (CsvReader csv = new CsvReader(reader, csvConfiguration))
-            {                
-                var records = csv.GetRecords<Item>();
-                List<Item> list = records.ToList();
-
-                foreach(Item item in list)
-                {
-                    accountingBook.AccountingBookItems.Add(item);
-                }
-            }
-        }
-
-        private void CheckAndLoadDataIfDbDirectoryExistElseCreate()
-        {
-            if (File.Exists(pathToCsvDatabaseData)) 
-            {
-                LoadData();
-            }
-            else
-            {
-                Directory.CreateDirectory(System.IO.Path.GetDirectoryName(pathToCsvDatabaseData));
-            }
-        }
-
-        private void SaveItemsAsCSVHelper()
-        {
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(pathToCsvDatabaseData, false, Encoding.UTF8))
-                using (var csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
-                {
-                    csv.WriteRecords(accountingBook.AccountingBookItems);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
+            }          
         }
 
         private void ClearFilter()
