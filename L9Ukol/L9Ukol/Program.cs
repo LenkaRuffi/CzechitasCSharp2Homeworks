@@ -20,8 +20,9 @@ namespace L9Ukol
             IEnumerable<string> LFruits;
 
             LFruits = fruits.Where(f => f.StartsWith("L"));
-            //LFruits = fruits.Where(f => f.StartsWith("l", StringComparison.InvariantCultureIgnoreCase));
+            //LFruits = fruits.Where(f => f.StartsWith("l", StringComparison.InvariantCultureIgnoreCase)); <- moje řešeni bez rozlišení malých a velkých písmen
 
+            Console.WriteLine("L Fruits: ");
             foreach (string fruit in LFruits)
             {
                 Console.WriteLine(fruit);
@@ -38,6 +39,8 @@ namespace L9Ukol
 
             fourSixMultiples = mixedNumbers.Where(n => (n % 4) == 0 || (n % 6) == 0).ToList();
 
+            Console.WriteLine();
+            Console.WriteLine("Čísla dělitelná 4 nebo 6: ");
             foreach (int number in fourSixMultiples)
             {
                 Console.WriteLine(number);
@@ -60,11 +63,16 @@ namespace L9Ukol
             ascending = names.OrderBy(n => n).ToList();
             descending = names.OrderByDescending(n => n).ToList();
 
+            Console.WriteLine();
+            Console.WriteLine("Names ascending: ");
+
             foreach (string item in ascending)
             {
                 Console.WriteLine(item);
             };
 
+            Console.WriteLine();
+            Console.WriteLine("Names descending: ");
             foreach (string item in descending)
             {
                 Console.WriteLine(item);
@@ -75,6 +83,7 @@ namespace L9Ukol
                 15, 8, 21, 24, 32, 13, 30, 12, 7, 54, 48, 4, 49, 96
             };
             // Vypis pocet cisel v seznamu
+            Console.WriteLine();
             Console.WriteLine("Počet čísel v seznamu je: " + numbers.Count);
 
             List<double> purchases = new List<double>()
@@ -82,6 +91,7 @@ namespace L9Ukol
                 2340.29, 745.31, 21.76, 34.03, 4786.45, 879.45, 9442.85, 2454.63, 45.65
             };
             // Vypis soucet vsech cisel v seznamu
+            Console.WriteLine();
             Console.WriteLine("Soušet čísel v seznamu je: " + purchases.Sum());
 
             List<double> prices = new List<double>()
@@ -89,6 +99,7 @@ namespace L9Ukol
                 879.45, 9442.85, 2454.63, 45.65, 2340.29, 34.03, 4786.45, 745.31, 21.76
             };
             // Vypis nejvyssi cenu v seznamu
+            Console.WriteLine();
             Console.WriteLine("Nejvyšší cena v seznamu je: " + prices.Max());
 
 
@@ -108,12 +119,15 @@ namespace L9Ukol
 
             listB = wheresSquaredo.TakeWhile(n => n < 80).ToList();
 
+            Console.WriteLine();
+            Console.WriteLine("Čísla menší než 60: ");
             foreach (var item in listA)
             {
                 Console.WriteLine(item.ToString());
             }
 
             Console.WriteLine();
+            Console.WriteLine("Čísla, dokud jsou menší než 80: ");
 
             foreach (var item in listB)
             {
@@ -138,12 +152,16 @@ namespace L9Ukol
             // Ze seznamu zakazniku vyber milionare (podle zustatku na uctu -- balance)
             // a zgrupuj je podle banky
 
-            var groupedByBank = customers.Where(m => m.Balance > 1000000).GroupBy(m => m.Bank).ToList();
+            Console.WriteLine();
+            Console.WriteLine("Moje reseni:");
+
+            var groupedByBank = customers.Where(m => m.Balance > 1000000).GroupBy(m => m.Bank).ToList(); //moje reseni
+            var groupedByBank2 = customers.Where(m => m.Balance > 1000000).GroupBy(m => m.Bank, m => m.Name).ToList(); //reseni z odkazu
 
             foreach (var item in groupedByBank)
             {
-                Console.WriteLine($"{item.Key}: {string.Join(", ", item)}"); //nechci do predem dane tridy davat override ToString(), ale nelibi se mi ten vypis
-                Console.WriteLine("Zákazníci: "); //takze tady je moje reseni vypisu
+                Console.WriteLine($"Banka: {item.Key}"); 
+                Console.WriteLine("Zákazníci: "); 
 
                 int element = item.Count(); 
 
@@ -154,10 +172,18 @@ namespace L9Ukol
                 }
 
                 Console.WriteLine();
-            } 
+            }
 
-           
-            // Create some banks and store in a List
+            Console.WriteLine();
+            Console.WriteLine("Výpis řešení z odkazu: ");
+
+            foreach (var item in groupedByBank2)
+            {
+                Console.WriteLine($"{item.Key}: {string.Join(", ", item)}");
+            }
+
+
+                // Create some banks and store in a List
             List<Bank> banks = new List<Bank>() 
             {
                 new Bank(){ Name="First Tennessee", Symbol="FTB"},
@@ -172,19 +198,12 @@ namespace L9Ukol
             // podle seznamu bank
             List<Customer> millionaireReport = new List<Customer>();
 
-            List<Customer> milionare = customers.Where(c => c.Balance > 1000000).ToList();
+            List<Customer> millionares = customers.Where(c => c.Balance > 1000000).ToList();
 
-            /*millionaireReport = from m in milionare
-                                 join b in banks
-                                     on m.Bank equals b.Symbol
-                                 select new{ name = m.Name, 
-                                        m.Balance, b.Name};*/
-
- 
-
-         var millionaireReport2 = milionare.Join(banks,
+            
+         var millionaireReport2 = millionares.Join(banks,
                 m => m.Bank,
-                b => b.Symbol, (millionare, bank) => new
+                b => b.Symbol, (millionare, bank) => new //pokud pouziju slovo new, tak musim pojmenovat nove vytvareny sloupce (staci jen nektery), kdyz dam jen select, tak se mi pojmenuji jen jako item 1,2,,,,
                 {
                     Name = millionare.Name,
                     Balance = millionare.Balance,
@@ -197,15 +216,15 @@ namespace L9Ukol
                 millionaireReport.Add(newItem);
             }
 
-
-            //millionaireReport = millionaireReport2;          
-
+            Console.WriteLine();
+            Console.WriteLine("Výpis z listu milionářů: ");
             foreach (Customer customer in millionaireReport)
             {
                 Console.WriteLine($"{customer.Name} at {customer.Bank}");
             };
 
             Console.WriteLine();
+            Console.WriteLine("Výpis z var milionářů: ");
 
             foreach (var customer in millionaireReport2)
               {
